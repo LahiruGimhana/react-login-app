@@ -1,7 +1,7 @@
-const loginData={
+const loginData = {
         name: "admin",
         email: "admin@admin.com",
-        password: "admin123"   
+        password: "admin123"
 }
 
 // export {loginData};
