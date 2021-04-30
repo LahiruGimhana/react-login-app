@@ -3,7 +3,8 @@ import NameList from './NameList';
 
 function UserList(props) {
     return (
-        <div>       
+        <>
+        <div className="col" style={{width:"100%"}}>
             <li className="list-group-item">
                 <p style={{color:"red"}}>
                     <a href="">
@@ -12,8 +13,14 @@ function UserList(props) {
                 </p>
                 <p><span style={{color:"red"}}>Name:</span> {props.name}</p>
                 <p><span style={{color:"red"}}>city: </span>{props.city}</p>
-        </li>
-    </div>
+                <button className="btn btn-danger ">remove</button>
+            </li>    
+        </div>       
+        {/* <div className="col">
+            
+        </div> */}
+            
+    </>
     );
 }
 

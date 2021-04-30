@@ -20,12 +20,7 @@ function NameList() {
                 picture: { medium: "https://randomuser.me/api/portraits/med/women/89.jpg" },
             },
 
-            {
-                id: 3,
-                name: { title: "Mrs", first: "gimhana", last: "dayananda" },
-                location: { street: "8416", city: "Kurunegala", state: "Kırşehir" },
-                picture: { medium: "https://randomuser.me/api/portraits/med/women/90.jpg" },
-            }
+            
         ]
     );
 
@@ -44,27 +39,31 @@ function NameList() {
         );
     }
 
-    // const ChatListComponent = () => {
-    //     return(
-    //         nameList.map(aDetails=>{
-    //             return(
-    //                 <UserList
-
-    //                 />
-    //             );
-    //         })
-    //     );
-    // }
-
+    const addUserHandeler=()=>{
+        const newUser={
+            id:4,
+            name:{title: "Mrs",first: "Melike",last: "Abacı"},
+            location: {  
+                city: "Elazığ",
+                state: "İzmir",
+                country: "Turkey",
+                postcode: 82207,
+                },
+                
+            picture: {medium:`https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg`},
+        };
+        setNameList((nameList)=>[...nameList, newUser]);
+    }
 
 
     return (
         <React.Fragment>
 
             <ul>
-                <div className="container mt-4">
+                <div >
                     <h3><span class="badge badge-pill badge-success">User List</span></h3>
                     <ul className="list-group">{NameListComponent()}</ul>
+                    <button className="btn btn-primary mb-4" onClick={addUserHandeler}>click</button>
                     {/* <ul className="list-group">{ChatListComponent()}</ul> */}
                 </div>
             </ul>
