@@ -1,74 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import UserList from './UserList';
 // import chatList from './ChatList';
+import { UserHandler } from '../../UserData/UserData';
+
+let userHandler = new UserHandler();
 
 function NameList() {
 
-    const [nameList, setNameList] = useState(
-        [
-            {
-                id: 1,
-                name: { title: "mr", first: "brad", last: "gibson" },
-                location: { street: "9278 new road", city: "kilcoole", state: "waterford", postcode: "93027" },
-                picture: { large: "https://randomuser.me/api/portraits/men/75.jpg", medium: "https://randomuser.me/api/portraits/med/men/75.jpg" },
-            },
+    const [nameList, setNameList] = useState({});
 
-            {
-                id: 2,
-                name: { title: "Ms", first: "Gül", last: "Abacı" },
-                location: { street: "8416", city: "Kars", state: "Kırşehir" },
-                picture: { medium: "https://randomuser.me/api/portraits/med/women/89.jpg" },
-            },
+    useEffect(() => {
 
-            {
-                id: 3,
-                name: { title: "Mrs", first: "gimhana", last: "dayananda" },
-                location: { street: "8416", city: "Kurunegala", state: "Kırşehir" },
-                picture: { medium: "https://randomuser.me/api/portraits/med/women/90.jpg" },
-            }
-        ]
-    );
+        let userList = userHandler.getAllUsers();
+
+        let usrListObj = userList.reduce((acc, item) => {
+            acc[item.id] = item;
+            return acc;
+        }, {});
+
+        setNameList(usrListObj);
+
+    }, []);
 
 
     const NameListComponent = () => {
         return (
-            nameList.map(aName => {
+            Object.keys(nameList).map(key => {
                 return (
                     <UserList
-                        picture={aName.picture.medium}
-                        name={`${aName.name.first} ${aName.name.last}`}
-                        city={aName.location.city}
+                        picture={nameList[key].picture.medium}
+                        name={`${nameList[key].name.first} ${nameList[key].name.last}`}
+                        city={nameList[key].location.city}
                     />
                 );
             })
         );
     }
 
-    // const ChatListComponent = () => {
-    //     return(
-    //         nameList.map(aDetails=>{
-    //             return(
-    //                 <UserList
+    const addUserHandeler = () => {
+        const newUser = {
+            name: { title: "Mrs", first: "Melike", last: "Abacı" },
+            location: {
+                city: "Elazığ",
+                state: "İzmir",
+                country: "Turkey",
+                postcode: 82207,
+            },
 
-    //                 />
-    //             );
-    //         })
-    //     );
-    // }
+            picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
+        };
 
+        let createdUser = userHandler.addNewUser(newUser);
+
+        setNameList(prevState => {
+            return { ...prevState, [createdUser.id]: createdUser };
+        });
+
+    }
 
 
     return (
-        <React.Fragment>
+        <>
 
             <ul>
-                <div className="container mt-4">
+                <div >
+                    <button className="btn btn-primary mb-4" onClick={addUserHandeler}>Add User</button>
                     <h3><span class="badge badge-pill badge-success">User List</span></h3>
                     <ul className="list-group">{NameListComponent()}</ul>
+
                     {/* <ul className="list-group">{ChatListComponent()}</ul> */}
                 </div>
             </ul>
-        </React.Fragment>
+        </>
     );
 }
 
