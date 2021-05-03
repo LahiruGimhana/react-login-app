@@ -26,7 +26,28 @@ class UserHandler {
     }
 
     getAllUsers() {
-        return this.userList;
+
+        return new Promise((resolve, reject) => {
+
+            fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                console.log('Success:', data);
+                return resolve(data);
+            }).catch((error) => {
+                console.error('Error:', error);
+                return reject(error);
+            });
+
+        })
+
+
+
     }
 
     addNewUser(user) {

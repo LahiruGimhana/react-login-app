@@ -1,22 +1,19 @@
-import React , {useState, useCallback} from 'react';
+import React from 'react';
 import NameList from './NameList';
 
 
 function UserList(props) {
 
-    const [nameList, setNameList] = useState();
-
-    const onRemove=(id, callback)=>{
+    const onRemove = (id) => {
+        props.onRemove(id);
         console.log(props.id);
-        const newList = nameList.filter((item) => item.id !== id);
-        setNameList(newList);
-        
+
     }
 
 
     return (
         <>
-            <div className="col"  style={{ width: "100%" }}>
+            <div className="col" style={{ width: "100%" }}>
                 <li className="list-group-item">
                     <p style={{ color: "red" }}>
                         <a href="">
@@ -25,8 +22,8 @@ function UserList(props) {
                     </p>
                     <p><span style={{ color: "red" }}>Name:</span> {props.name}</p>
                     <p><span style={{ color: "red" }}>city: </span>{props.city}</p>
-                    <button className="btn btn-danger" onClick={() => onRemove(props.id)}>remove</button>
-                    
+                    <button className="btn btn-danger" onClick={() => { onRemove(props.id) }}>remove</button>
+
                 </li>
             </div>
         </>

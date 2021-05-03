@@ -7,21 +7,61 @@ import './Name.css'
 let userHandler = new UserHandler();
 
 function NameList() {
-    
+
     const [nameList, setNameList] = useState({});
 
-    useEffect(() => {
+    useEffect(async () => {
 
-        let userList = userHandler.getAllUsers();
+        /* let usrListObj = userList.reduce((acc, item) => {
+                acc[item.id] = item;
+                return acc;
+            }, {}); */
 
-        let usrListObj = userList.reduce((acc, item) => {
-            acc[item.id] = item;
-            return acc;
-        }, {});
 
-        setNameList(usrListObj);
+
+        /* userHandler.getAllUsers().then(userList => {
+        
+            setNameList(userList);
+        
+        }).catch(ex => {
+            console.error(ex);
+        }); */
+
+        try {
+            let userList = await userHandler.getAllUsers();
+
+            setNameList(userList);
+
+        } catch (ex) {
+
+            console.error(ex);
+
+        }
+
+
+
+
+
+
 
     }, []);
+
+    const onRemoveUser = (id) => {
+
+        try {
+            setNameList(prevVal => {
+                let tempPrev = { ...prevVal };
+                delete tempPrev[id];
+                return tempPrev;
+            });
+
+
+        } catch (ex) {
+
+        }
+
+
+    }
 
 
     const NameListComponent = () => {
@@ -32,7 +72,8 @@ function NameList() {
                         picture={nameList[key].picture.medium}
                         name={`${nameList[key].name.first} ${nameList[key].name.last}`}
                         city={nameList[key].location.city}
-                        id={nameList[key].id}
+                        id={key}
+                        onRemove={onRemoveUser}
                     />
                 );
             })
@@ -68,7 +109,11 @@ function NameList() {
                 <div >
                     <button className="btn btn-primary mb-4" onClick={addUserHandeler}>Add User</button>
                     <h3><span className="badge badge-pill badge-success">User List</span></h3>
-                    <ul className="list-group">{NameListComponent()}</ul>
+                    <ul className="list-group">
+                        <div>
+                            {NameListComponent()}
+                        </div>
+                    </ul>
 
                     {/* <ul className="list-group">{ChatListComponent()}</ul> */}
                 </div>
