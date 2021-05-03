@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import UserList from './UserList';
 // import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
+import './Name.css'
 
 let userHandler = new UserHandler();
 
 function NameList() {
-
+    
     const [nameList, setNameList] = useState({});
 
     useEffect(() => {
@@ -31,6 +32,7 @@ function NameList() {
                         picture={nameList[key].picture.medium}
                         name={`${nameList[key].name.first} ${nameList[key].name.last}`}
                         city={nameList[key].location.city}
+                        id={nameList[key].id}
                     />
                 );
             })
@@ -65,7 +67,7 @@ function NameList() {
             <ul>
                 <div >
                     <button className="btn btn-primary mb-4" onClick={addUserHandeler}>Add User</button>
-                    <h3><span class="badge badge-pill badge-success">User List</span></h3>
+                    <h3><span className="badge badge-pill badge-success">User List</span></h3>
                     <ul className="list-group">{NameListComponent()}</ul>
 
                     {/* <ul className="list-group">{ChatListComponent()}</ul> */}
