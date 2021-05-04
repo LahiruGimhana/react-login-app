@@ -49,7 +49,7 @@ export class Register extends Component {
                     <input onChange={e=>this.confirm_password=e.target.value} type="password" className="form-control" placeholder="comfirm password"/>
                     </div>
                 </div>
-                <button className="btn btn-primary btn-block">Sign up</button>
+                <button className="btn btn-primary btn-block" type="submit">Sign up</button>
             </div>
             </form>
         )

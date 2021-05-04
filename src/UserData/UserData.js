@@ -4,7 +4,7 @@ class UserHandler {
         this.userList = [
             {
                 id: "dsdsds",
-                name: { title: "Mrs", first: "gimhana", last: "dayananda" },
+                name: { title: "Mrs", first: "gim", last: "daya" },
                 location: { street: "8416", city: "Kurunegala", state: "Kırşehir" },
                 picture: { medium: "https://randomuser.me/api/portraits/med/women/90.jpg" },
             },
@@ -50,14 +50,36 @@ class UserHandler {
 
     }
 
-    addNewUser(user) {
-        let tempUser = JSON.parse(JSON.stringify(user));
-        tempUser.id = Date.now();
-        this.userList.push(tempUser);
-        return tempUser;
+//add new user using hardcode json data
+
+    // addNewUser(user) {
+    //     let tempUser = JSON.parse(JSON.stringify(user));
+    //     tempUser.id = Date.now();
+    //     this.userList.push(tempUser);
+    //     return tempUser;
+    // }
+
+    addNewUser(user){
+        return new Promise((resolve, reject) => {
+            fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              //   body: JSON.stringify(data),
+              }).then(response =>{
+                  return response.json();
+              }).then(data => {
+                console.log('Success:', data);
+                  return resolve(data);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+                return reject(error);
+              });
+          }
+        )
     }
-
-
 }
 
 export { UserHandler };

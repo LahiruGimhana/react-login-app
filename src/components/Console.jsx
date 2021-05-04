@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 import './Console.css';
 import ChatList from './sub/ChatList';
-import UserList from './sub/UserList';
+import User from './sub/User';
 import NameList from './sub/NameList';
 
 
@@ -38,9 +38,17 @@ const Console = (props) => {
 
     return (
         <div className="container">
+            
             <div class="header">
-                <h3 >Console login</h3>
-                <h4 >Welcome, <span>{s_name}</span></h4>
+                <div className="col-11 center" >        
+                    <h3 >Chat Application</h3>
+                    <h4 >Welcome, <span>{s_name}</span></h4>
+                </div>
+                <div className="col" id="logout">
+                    <button className="btn btn-warning" onClick={() => {
+                        logout();
+                    }}>Logout</button>
+                </div>
             </div>
             <div class="wrapper clearfix">
                 <div class="nav">
@@ -58,11 +66,7 @@ const Console = (props) => {
                         <ChatList />
                     </div>
 
-                    <div className="col">
-                        <button className="btn btn-warning" onClick={() => {
-                            logout();
-                        }}>Logout</button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="footer">

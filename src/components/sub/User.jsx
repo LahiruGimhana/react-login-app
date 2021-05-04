@@ -1,8 +1,8 @@
 import React from 'react';
 import NameList from './NameList';
+import './User.css'
 
-
-function UserList(props) {
+function User(props) {
 
     const onRemove = (id) => {
         props.onRemove(id);
@@ -30,4 +30,4 @@ function UserList(props) {
     );
 }
 
-export default UserList
+export default User
