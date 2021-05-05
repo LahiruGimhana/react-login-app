@@ -27,8 +27,12 @@ class UserHandler {
 
     getAllUsers() {
 
+        //return wenne promise ekak
         return new Promise((resolve, reject) => {
 
+            //fetch method call
+            //parameter 1- url
+            //parameter 2- method, header, ....
             fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
                 method: 'GET',
                 headers: {
@@ -59,19 +63,24 @@ class UserHandler {
     //     return tempUser;
     // }
 
+
     addNewUser(user){
         return new Promise((resolve, reject) => {
             fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
                 method: 'POST', // or 'PUT'
                 headers: {
                   'Content-Type': 'application/json',
-                }
-              //   body: JSON.stringify(data),
+                },
+                 body: JSON.stringify(user),
               }).then(response =>{
                   return response.json();
               }).then(data => {
-                console.log('Success:', data);
-                  return resolve(data);
+                console.log('Success:', data); //data kiyla return wenne object ekk
+                  //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
+                  return resolve({
+                      key:data.name,
+                      user:user
+                  });
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -80,7 +89,32 @@ class UserHandler {
           }
         )
     }
-}
 
+
+
+removeUser(id){
+    return new Promise((resolve, reject) => {
+    // deletes entities
+    // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+    fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
+        method: 'DELETE',
+        redirect: 'follow',
+        headers: {
+          'x-rapidapi-host': 'fairestdb.p.rapidapi.com',
+          'x-rapidapi-key': 'apikey'
+        }
+            })
+            .then(response => response.json())
+            .then(res => {
+              console.log(res);
+              return resolve(res);
+            })
+            .catch(err => {
+              console.log(err);
+              return reject(err);
+            });
+        })
+    }
+}
 export { UserHandler };
 
