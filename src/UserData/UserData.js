@@ -41,7 +41,7 @@ class UserHandler {
             }).then(response => {
                 return response.json();
             }).then(data => {
-                console.log('Success:', data);
+                console.log('Success_Azz:', data);
                 return resolve(data);
             }).catch((error) => {
                 console.error('Error:', error);
@@ -68,14 +68,11 @@ class UserHandler {
         return new Promise((resolve, reject) => {
             fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
                 method: 'POST', // or 'PUT'
-                headers: {
-                  'Content-Type': 'application/json',
-                },
                  body: JSON.stringify(user),
               }).then(response =>{
                   return response.json();
               }).then(data => {
-                console.log('Success:', data); //data kiyla return wenne object ekk
+                console.log('Success___:', data.name); //data kiyla return wenne object ekk
                   //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
                   return resolve({
                       key:data.name,
@@ -98,11 +95,6 @@ removeUser(id){
     // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
     fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
         method: 'DELETE',
-        redirect: 'follow',
-        headers: {
-          'x-rapidapi-host': 'fairestdb.p.rapidapi.com',
-          'x-rapidapi-key': 'apikey'
-        }
             })
             .then(response => response.json())
             .then(res => {

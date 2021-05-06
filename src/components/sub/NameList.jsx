@@ -56,12 +56,18 @@ delete user using hard code json data
 
     const onRemoveUser = (id) => {
             console.log(id);
-            userHandler.removeUser(id).then((id)=>{
+            userHandler.removeUser(id).then(()=>{
                 setNameList(prevVal => {
                     let tempPrev = { ...prevVal };
+                    let x=tempPrev.id;
                     delete tempPrev[id];
+                    
                     return tempPrev;
                 });
+
+                // setNameList(prevState => {
+                //     return { ...prevState, [createdUser.id]: createdUser };
+                // });
             }).catch(ex=>{
                 console.error(ex);
             });
@@ -97,17 +103,17 @@ delete user using hard code json data
 
     //add new user API 
    const addUserHandeler = () => {
-        const newUser = {
-            name: { title: "Mrs", first: "Melike", last: "Abacı" },
-            location: {
-                city: "Elazığ",
-                state: "İzmir",
-                country: "Turkey",
-                postcode: 82207,
-            },
-
-        picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
-    };
+                const newUser = {
+                    name: { title: "Mrs", first: "Melike", last: "Abacı" },
+                    location: {
+                        city: "Elazığ",
+                        state: "İzmir",
+                        country: "Turkey",
+                        postcode: 82207,
+                    },
+                
+                    picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
+                };
         //methanath promis ekak return wenne 
         // let createdUser = userHandler.addNewUser(newUser); me widihata ganna nam awaite use k wenwa
         
@@ -120,7 +126,7 @@ delete user using hard code json data
             } */
 
             setNameList(prevState => {
-                return { ...prevState, [data.key]: data.User  };
+                return { ...prevState, [data.key]: data.user  };
             }); 
         }).catch(ex=>{
             console.error(ex);

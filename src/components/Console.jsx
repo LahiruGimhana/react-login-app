@@ -70,7 +70,7 @@ const Console = (props) => {
                 </div>
             </div>
             <div class="footer">
-                <p>copyright &copy; tutorialrepublic.com</p>
+                <p>copyright &copy;#######</p>
             </div>
 
         </div>
