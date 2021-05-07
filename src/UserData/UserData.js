@@ -4,7 +4,7 @@ class UserHandler {
         this.userList = [
             {
                 id: "dsdsds",
-                name: { title: "Mrs", first: "gimhana", last: "dayananda" },
+                name: { title: "Mrs", first: "gim", last: "daya" },
                 location: { street: "8416", city: "Kurunegala", state: "Kırşehir" },
                 picture: { medium: "https://randomuser.me/api/portraits/med/women/90.jpg" },
             },
@@ -26,18 +26,87 @@ class UserHandler {
     }
 
     getAllUsers() {
-        return this.userList;
+
+        //return wenne promise ekak
+        return new Promise((resolve, reject) => {
+
+            //fetch method call
+            //parameter 1- url
+            //parameter 2- method, header, ....
+            fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                console.log('Success_Azz:', data);
+                return resolve(data);
+            }).catch((error) => {
+                console.error('Error:', error);
+                return reject(error);
+            });
+
+        })
+
+
+
     }
 
-    addNewUser(user) {
-        let tempUser = JSON.parse(JSON.stringify(user));
-        tempUser.id = Date.now();
-        this.userList.push(tempUser);
-        return tempUser;
+//add new user using hardcode json data
+
+    // addNewUser(user) {
+    //     let tempUser = JSON.parse(JSON.stringify(user));
+    //     tempUser.id = Date.now();
+    //     this.userList.push(tempUser);
+    //     return tempUser;
+    // }
+
+
+    addNewUser(user){
+        return new Promise((resolve, reject) => {
+            fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
+                method: 'POST', // or 'PUT'
+                 body: JSON.stringify(user),
+              }).then(response =>{
+                  return response.json();
+              }).then(data => {
+                console.log('Success___:', data.name); //data kiyla return wenne object ekk
+                  //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
+                  return resolve({
+                      key:data.name,
+                      user:user
+                  });
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+                return reject(error);
+              });
+          }
+        )
     }
 
 
+
+removeUser(id){
+    return new Promise((resolve, reject) => {
+    // deletes entities
+    // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+    fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
+        method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(res => {
+              console.log(res);
+              return resolve(res);
+            })
+            .catch(err => {
+              console.log(err);
+              return reject(err);
+            });
+        })
+    }
 }
-
 export { UserHandler };
 
