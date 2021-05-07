@@ -1,13 +1,14 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import { Redirect, Route } from "react-router-dom";
 import UserForm from './UserForm'
 
-function ChatList(props) {
+let ChatList = ({ childRef }) => {
 
     const [showmenu, setShowmenu] = useState(false)
-    const addNewUser=(x)=>{
-        return x ? <Redirect  to={'./UserForm'} />:null;
+    const addNewUser = (x) => {
+        return x ? <Redirect to={'./UserForm'} /> : null;
     }
+
 
     // onSubmit = () => {
     //     if(userFound){
@@ -15,17 +16,19 @@ function ChatList(props) {
     //     }
     //  }
 
+
+
     return (
         <div>
             <span class="badge badge-pill badge-warning">Chat List</span>
-                {/* <p>Name:{props.name}</p> */}
-                <button className="btn btn-primary m-2"  onClick={() => setShowmenu(!showmenu)
-                        // addNewUser();
-                    }>Add new User</button>
-                    {/* <button onClick={this.onSubmit}>Login</button> */}
-            <UserForm/>
+            {/* <p>Name:{props.name}</p> */}
+            <button className="btn btn-primary m-2" onClick={() => setShowmenu(!showmenu)
+                // addNewUser();
+            }>Add new User</button>
+            {/* <button onClick={this.onSubmit}>Login</button> */}
+            <UserForm ref={childRef} />
         </div>
     )
-}
+};
 
 export default ChatList

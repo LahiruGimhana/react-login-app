@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
 import './Console.css';
 import ChatList from './sub/ChatList';
@@ -7,6 +7,8 @@ import NameList from './sub/NameList';
 
 
 const Console = (props) => {
+
+    const chatListRef = useRef();
 
     let history = useHistory();
 
@@ -33,14 +35,18 @@ const Console = (props) => {
         return data ? JSON.parse(data).email : null;
     };
 
+    const openAddUserForm = () => {
+        chatListRef.current.openAddUserPanel(true);
+    }
+
 
 
 
     return (
         <div className="container">
-            
+
             <div class="header">
-                <div className="col-11 center" >        
+                <div className="col-11 center" >
                     <h3 >Chat Application</h3>
                     <h4 >Welcome, <span>{s_name}</span></h4>
                 </div>
@@ -57,16 +63,16 @@ const Console = (props) => {
                             {/* <buuton className="btn btn-primary" onClick={addUserHandeler}>add user</buuton> */}
                         </div>
                         <div className="col" id="user" style={{ float: "right", textAlign: "left", width: '90%', margin: "0%", padding: "0%" }}>
-                            <NameList />
+                            <NameList openAddUserForm={openAddUserForm} />
                         </div>
                     </div>
                 </div>
                 <div className="section">
                     <div className="col border border-primary m-1">
-                        <ChatList />
+                        <ChatList childRef={chatListRef} />
                     </div>
 
-                    
+
                 </div>
             </div>
             <div class="footer">
