@@ -59,9 +59,7 @@ function NameList(props) {
         userHandler.removeUser(id).then(() => {
             setNameList(prevVal => {
                 let tempPrev = { ...prevVal };
-                let x = tempPrev.id;
                 delete tempPrev[id];
-
                 return tempPrev;
             });
 

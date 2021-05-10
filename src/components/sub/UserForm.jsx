@@ -10,29 +10,45 @@ let UserForm = forwardRef((props, ref) => {
         }
     }));
 
+
+    
+
+    const [formData, setFormData] = useState({ FirstName: "", LastName: "",City: "", Id: "" });
+    
+    const submitedUserForm=(props)=>{
+        console.log("props print");
+        
+    }
+    const handleSubmitAddUser= (event) => {
+        event.preventDefault();
+        submitedUserForm();
+        // console.log(`${formData.FirstName}-- ${formData.LastName}-- ${formData.City}`);
+    }
+
     return (
         <>
-            {visibility && <form>
-                <div class="input-group mb-3">
-                    <span class="input-group-addon m-1">First Name</span>
-                    <input id="msg" type="text" class="form-control" name="msg" placeholder=" First Name" />
+            {visibility && <form onSubmit={handleSubmitAddUser}>
+                <div className="input-group mb-3">
+                    <span className="input-group-addon m-1">First Name</span>
+                    <input id="msg" type="text" className="form-control" name="FirstName"  onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" />
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-addon m-1">Last Name</span>
-                    <input id="msg" type="text" class="form-control" name="msg" placeholder="Last Name" />
+                <div className="input-group mb-3">
+                    <span className="input-group-addon m-1">Last Name</span>
+                    <input id="msg" type="text" className="form-control" name="LastName" onChange={e => setFormData({ ...formData, LastName: e.target.value})} value={FormData.LastName} placeholder="Last Name" />
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-addon m-1">City</span>
-                    <input id="msg" type="text" class="form-control" name="msg" placeholder="City" />
+                <div className="input-group mb-3">
+                    <span className="input-group-addon m-1">City</span>
+                    <input id="msg" type="text" className="form-control" name="City" onChange={e => setFormData({ ...formData, City: e.target.value})} value={FormData.City} placeholder="City" />
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-addon m-1">Id</span>
-                    <input id="msg" type="text" class="form-control" name="msg" placeholder="Id" />
+                <div className="input-group mb-3">
+                    <span className="input-group-addon m-1">Id</span>
+                    <input id="msg" type="text" className="form-control" name="Id" onChange={e => setFormData({ ...formData, Id: e.target.value})} value={FormData.Id} placeholder="Id" />
                 </div>
-                <button className="btn btn-primary m-2" type="submit">Submit</button>
-                <button className="btn btn-primary m-2" type="reset" onClick={() => {
+                <button className="btn btn-primary m-2" type="submit" >Submit</button>
+                <button className="btn btn-primary m-2" type="reset">Reset</button>
+                <button className="btn btn-danger m-2" onClick={() => {
                     setVisibility(false);
-                }}>Reset</button>
+                }}>Cancel</button>
             </form>}
         </>
     )
