@@ -2,7 +2,8 @@ import { React, useState } from 'react'
 import { Redirect, Route } from "react-router-dom";
 import UserForm from './UserForm'
 
-let ChatList = ({childRef}, props) => {
+// let ChatList = ({childRef}) => {
+let ChatList = ({childRef, ...props}) => {
 
     // onSubmit = () => {
     //     if(userFound){

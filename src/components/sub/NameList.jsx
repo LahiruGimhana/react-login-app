@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  forwardRef } from 'react';
+import React, { useState, useEffect,  forwardRef, useImperativeHandle} from 'react';
 import User from './User';
 import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
@@ -7,8 +7,17 @@ import './Name.css'
 let userHandler = new UserHandler();
 
 
-
+//Userform submited data 
     let NameList=forwardRef((props, ref)=>{
+        
+        useImperativeHandle(ref, () => ({
+            getUserFormData : (FormData)=>{
+                // console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
+            }
+        }));
+
+
+  
 // function NameList(props) {
 
     const [nameList, setNameList] = useState({});
