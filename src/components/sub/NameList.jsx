@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  forwardRef } from 'react';
 import User from './User';
 import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
@@ -6,7 +6,10 @@ import './Name.css'
 
 let userHandler = new UserHandler();
 
-function NameList(props) {
+
+
+    let NameList=forwardRef((props, ref)=>{
+// function NameList(props) {
 
     const [nameList, setNameList] = useState({});
 
@@ -166,7 +169,7 @@ function NameList(props) {
             </ul>
         </>
     );
-}
+})
 
 export default NameList
 

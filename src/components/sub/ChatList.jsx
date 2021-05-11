@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import { Redirect, Route } from "react-router-dom";
 import UserForm from './UserForm'
 
-let ChatList = ({ childRef }) => {
+let ChatList = ({childRef}, props) => {
 
     // onSubmit = () => {
     //     if(userFound){
@@ -10,8 +10,9 @@ let ChatList = ({ childRef }) => {
     //     }
     //  }
 
-const submitedUserForm=()=>{
-    alert(`aaa ${FormData.FirstName}`)
+const submitedUserForm = (formData)=>{
+    // alert(`aaa ${formData.FirstName}`)
+    props.submitedUserFormmm(formData);
 }
 
     return (
@@ -20,7 +21,7 @@ const submitedUserForm=()=>{
             {/* <p>Name:{props.name}</p> */}
 
             {/* <button onClick={this.onSubmit}>Login</button> */}
-            <UserForm ref={childRef} submitedUserForm={submitedUserForm}/>
+            <UserForm ref={childRef} submitedUserFormm={submitedUserForm}/>
         </div>
     )
 };

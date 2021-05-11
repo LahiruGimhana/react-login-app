@@ -15,13 +15,13 @@ let UserForm = forwardRef((props, ref) => {
 
     const [formData, setFormData] = useState({ FirstName: "", LastName: "",City: "", Id: "" });
     
-    const submitedUserForm=(props)=>{
-        console.log("props print");
+    // const submitedUserForm=(props)=>{
+    //     console.log("props print");
         
-    }
+    // }
     const handleSubmitAddUser= (event) => {
         event.preventDefault();
-        submitedUserForm();
+        props.submitedUserFormm(formData);
         // console.log(`${formData.FirstName}-- ${formData.LastName}-- ${formData.City}`);
     }
 
@@ -34,15 +34,15 @@ let UserForm = forwardRef((props, ref) => {
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">Last Name</span>
-                    <input id="msg" type="text" className="form-control" name="LastName" onChange={e => setFormData({ ...formData, LastName: e.target.value})} value={FormData.LastName} placeholder="Last Name" />
+                    <input id="msg" type="text" className="form-control" name="LastName" onChange={e => setFormData({ ...formData, LastName: e.target.value})} value={formData.LastName} placeholder="Last Name" />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">City</span>
-                    <input id="msg" type="text" className="form-control" name="City" onChange={e => setFormData({ ...formData, City: e.target.value})} value={FormData.City} placeholder="City" />
+                    <input id="msg" type="text" className="form-control" name="City" onChange={e => setFormData({ ...formData, City: e.target.value})} value={formData.City} placeholder="City" />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">Id</span>
-                    <input id="msg" type="text" className="form-control" name="Id" onChange={e => setFormData({ ...formData, Id: e.target.value})} value={FormData.Id} placeholder="Id" />
+                    <input id="msg" type="text" className="form-control" name="Id" onChange={e => setFormData({ ...formData, Id: e.target.value})} value={formData.Id} placeholder="Id" />
                 </div>
                 <button className="btn btn-primary m-2" type="submit" >Submit</button>
                 <button className="btn btn-primary m-2" type="reset">Reset</button>

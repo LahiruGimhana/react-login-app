@@ -9,6 +9,7 @@ import NameList from './sub/NameList';
 const Console = (props) => {
 
     const chatListRef = useRef();
+    const nameListRef = useRef();
 
     let history = useHistory();
 
@@ -40,6 +41,15 @@ const Console = (props) => {
     }
 
 
+    //access user form submited data
+    // const submitedUserForm = (formData) => {
+    //     // alert(`bbb ${formData.FirstName}`)
+    //     alert(`bbb `)
+    // }
+    
+    const submitedUser = (formData)=>{
+        alert(`aaa ${formData.FirstName}`);
+    }
 
 
     return (
@@ -63,15 +73,14 @@ const Console = (props) => {
                             {/* <buuton className="btn btn-primary" onClick={addUserHandeler}>add user</buuton> */}
                         </div>
                         <div className="col" id="user" style={{ float: "right", textAlign: "left", width: '90%', margin: "0%", padding: "0%" }}>
-                            <NameList openAddUserForm={openAddUserForm} />
+                            <NameList openAddUserForm={openAddUserForm}  childRef1={nameListRef} />
                         </div>
                     </div>
                 </div>
                 <div className="section">
                     <div className="col border border-primary m-1">
-                        <ChatList childRef={chatListRef} />
+                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef}  />
                     </div>
-
 
                 </div>
             </div>
