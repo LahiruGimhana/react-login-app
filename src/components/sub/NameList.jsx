@@ -12,7 +12,8 @@ let userHandler = new UserHandler();
         
         useImperativeHandle(ref, () => ({
             getUserFormData : (FormData)=>{
-                // console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
+                console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
+                addUserHandeler(FormData);
             }
         }));
 
@@ -112,15 +113,10 @@ let userHandler = new UserHandler();
         } */
 
     //add new user API 
-    const addUserHandeler = () => {
+    const addUserHandeler = (FormData) => {
         const newUser = {
-            name: { title: "Mrs", first: "Melike", last: "Abacı" },
-            location: {
-                city: "Elazığ",
-                state: "İzmir",
-                country: "Turkey",
-                postcode: 82207,
-            },
+            name: { title: "Mrs", first:FormData.FirstName, last: FormData.LastName },
+            location: {city: FormData.City, state: "İzmir", country: "Turkey", postcode: 82207},
 
             picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
         };
