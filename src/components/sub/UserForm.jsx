@@ -7,24 +7,30 @@ let UserForm = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         openAddUserPanel: (val) => {
+            setFormData({ FirstName: "", LastName: "",City: "", Id: "", Picture:""});
             setVisibility(val);
             setVisibile(true);
         },
         viewSelectUserFormData: (obj)=>{
         // alert(` success acces view data ${obj.name.first}`);
             setVisibility(true);
-            setVisibile(false)
-            getName(obj);
+            setVisibile(false);
+            
+            //state set - click karana userta adalawa 
+            setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium});
+            // console.log(`==================================`)
+            console.log(obj)
+            // getName(obj);
         }
     }));
 
-    const getName=(obj)=>{
-        //  alert(obj.name.first) 
-        return "aaa";      
-    }
+    // const getName=(obj)=>{
+    //     //  alert(obj.name.first) 
+    //     return "aaa";      
+    // }
     
 
-    const [formData, setFormData] = useState({ FirstName: "", LastName: "",City: "", Id: "" });
+    const [formData, setFormData] = useState({ FirstName: "", LastName: "",City: "", Id: "", Picture:""});
     
     // const submitedUserForm=(props)=>{
     //     console.log("props print");
@@ -39,9 +45,10 @@ let UserForm = forwardRef((props, ref) => {
     return (
         <>
             {visibility && <form onSubmit={handleSubmitAddUser}>
+                <div>{!visibile && < img src={formData.Picture} width="100" height="100"></img>}</div>
                 <div className="input-group mb-3">
-                    <span className="input-group-addon m-1">First Name</span>
-                    <input id="msg" type="text" className="form-control" name="FirstName" value="{getName()}" onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" />
+                    <span className="input-group-addon m-1">First Name </span>
+                    <input id="msg" type="text" className="form-control" name="FirstName" onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">Last Name</span>
