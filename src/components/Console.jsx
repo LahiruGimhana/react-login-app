@@ -36,6 +36,8 @@ const Console = (props) => {
         return data ? JSON.parse(data).email : null;
     };
 
+
+    //add user button pass as a ref to userform through chatlist
     const openAddUserForm = () => {
         chatListRef.current.openAddUserPanel(true);
     }
@@ -54,6 +56,18 @@ const Console = (props) => {
         nameListRef.current.getUserFormData(formData);
         // console.log(nameListRef.current)
     }
+
+    //view data
+    const onViewUser=(obj)=>{
+        // console.log(obj.name.first);
+        // alert(obj.name.first);
+        chatListRef.current.viewSelectUserFormData(obj);
+    }
+
+    const onEditUser=(id)=>{
+        alert(`hello edit process ${id}`);
+    }
+
 
 
     return (
@@ -77,7 +91,7 @@ const Console = (props) => {
                             {/* <buuton className="btn btn-primary" onClick={addUserHandeler}>add user</buuton> */}
                         </div>
                         <div className="col" id="user" style={{ float: "right", textAlign: "left", width: '90%', margin: "0%", padding: "0%" }}>
-                            <NameList openAddUserForm={openAddUserForm}  ref={nameListRef} />
+                            <NameList openAddUserForm={openAddUserForm}  ref={nameListRef} onViewUser={onViewUser} onEditUser={onEditUser}/>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect,  forwardRef, useImperativeHandle} from 'rea
 import User from './User';
 import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
-import './Name.css'
+import './NameList.css'
 
 let userHandler = new UserHandler();
 
@@ -85,7 +85,17 @@ let userHandler = new UserHandler();
     }
 
 
-
+    const onViewUser=(id)=>{
+            let x={...nameList};
+            //read state data
+            // console.log(x[id].name.first);
+            props.onViewUser(x[id]);
+    }
+   
+    const onEditUser=(id)=>{
+        props.onEditUser(id);
+        // props.onViewUser(tempView);
+    }
 
 
     /*     add user using hard code data
@@ -150,6 +160,8 @@ let userHandler = new UserHandler();
                         city={nameList[key].location.city}
                         id={key}
                         onRemove={onRemoveUser}
+                        onView={onViewUser}
+                        onEdit={onEditUser}
                     />
 
                 );

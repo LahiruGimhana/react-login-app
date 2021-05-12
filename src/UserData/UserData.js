@@ -107,6 +107,32 @@ removeUser(id){
             });
         })
     }
+
+
+
+
+viewUser(id){
+    return new Promise((resolve, reject) => {
+    // deletes entities
+    // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+    fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
+        method: 'VIEW',
+            })
+            .then(response => response.json())
+            .then(res => {
+              console.log(res);
+              return resolve(res);
+            })
+            .catch(err => {
+              console.log(err);
+              return reject(err);
+            });
+        })
+    }
 }
+
+
+
+
 export { UserHandler };
 

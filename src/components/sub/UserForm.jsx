@@ -3,14 +3,25 @@ import React, { useState, forwardRef, useImperativeHandle } from 'react'
 let UserForm = forwardRef((props, ref) => {
 
     const [visibility, setVisibility] = useState(false);
+    const [visibile, setVisibile] = useState(true);
 
     useImperativeHandle(ref, () => ({
         openAddUserPanel: (val) => {
             setVisibility(val);
+            setVisibile(true);
+        },
+        viewSelectUserFormData: (obj)=>{
+        // alert(` success acces view data ${obj.name.first}`);
+            setVisibility(true);
+            setVisibile(false)
+            getName(obj);
         }
     }));
 
-
+    const getName=(obj)=>{
+        //  alert(obj.name.first) 
+        return "aaa";      
+    }
     
 
     const [formData, setFormData] = useState({ FirstName: "", LastName: "",City: "", Id: "" });
@@ -30,7 +41,7 @@ let UserForm = forwardRef((props, ref) => {
             {visibility && <form onSubmit={handleSubmitAddUser}>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">First Name</span>
-                    <input id="msg" type="text" className="form-control" name="FirstName"  onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" />
+                    <input id="msg" type="text" className="form-control" name="FirstName" value="{getName()}" onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">Last Name</span>
@@ -44,8 +55,8 @@ let UserForm = forwardRef((props, ref) => {
                     <span className="input-group-addon m-1">Id</span>
                     <input id="msg" type="text" className="form-control" name="Id" onChange={e => setFormData({ ...formData, Id: e.target.value})} value={formData.Id} placeholder="Id" />
                 </div>
-                <button className="btn btn-primary m-2" type="submit" >Submit</button>
-                <button className="btn btn-primary m-2" type="reset">Reset</button>
+                {visibile && <button className="btn btn-primary m-2" type="submit" >Submit</button>}
+                {visibile && <button className="btn btn-primary m-2" type="reset">Reset</button>}
                 <button className="btn btn-danger m-2" onClick={() => {
                     setVisibility(false);
                 }}>Cancel</button>
