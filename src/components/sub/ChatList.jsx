@@ -16,13 +16,17 @@ const submitedUserForm = (formData)=>{
     props.submitedUserFormmm(formData);
 }
 
+const editedUserForm=(formData)=>{
+    props.editedUserFormm(formData);
+}
+
     return (
         <div>
             <span class="badge badge-pill badge-warning">Chat List</span>
             {/* <p>Name:{props.name}</p> */}
 
             {/* <button onClick={this.onSubmit}>Login</button> */}
-            <UserForm ref={childRef} submitedUserFormm={submitedUserForm}/>
+            <UserForm ref={childRef} submitedUserFormm={submitedUserForm} editedUserFormm={editedUserForm}/>
         </div>
     )
 };

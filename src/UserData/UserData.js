@@ -66,7 +66,7 @@ class UserHandler {
 
     addNewUser(user){
         return new Promise((resolve, reject) => {
-            fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
+            fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/${user}.json', {
                 method: 'POST', // or 'PUT'
                  body: JSON.stringify(user),
               }).then(response =>{
@@ -89,12 +89,12 @@ class UserHandler {
 
 
 
-removeUser(id){
-    return new Promise((resolve, reject) => {
-    // deletes entities
-    // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
-    fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
-        method: 'DELETE',
+    removeUser(id){
+        return new Promise((resolve, reject) => {
+        // deletes entities
+        // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+        fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
+            method: 'DELETE',
             })
             .then(response => response.json())
             .then(res => {
@@ -110,28 +110,35 @@ removeUser(id){
 
 
 
-
-viewUser(id){
-    return new Promise((resolve, reject) => {
-    // deletes entities
-    // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
-    fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
-        method: 'VIEW',
-            })
-            .then(response => response.json())
-            .then(res => {
-              console.log(res);
-              return resolve(res);
-            })
-            .catch(err => {
-              console.log(err);
-              return reject(err);
+    
+    editUser(user){
+        return new Promise((resolve, reject) => {
+            console.log(user)
+        // deletes entities
+        // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+        fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${user}.json`, {
+            method: 'PATCH',
+            body: JSON.stringify(user),
+        }).then(response =>{
+            return response.json();
+        }).then(data => {
+          console.log('Success___:', data.name); //data kiyla return wenne object ekk
+            //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
+            return resolve({
+                key:data.name,
+                user:user
             });
         })
+        .catch((error) => {
+          console.error('Error:', error);
+          return reject(error);
+        });
     }
+  )
+}   
+
+
 }
-
-
 
 
 export { UserHandler };

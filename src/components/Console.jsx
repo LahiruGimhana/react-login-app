@@ -64,10 +64,14 @@ const Console = (props) => {
         chatListRef.current.viewSelectUserFormData(obj);
     }
 
-    const onEditUser=(id)=>{
-        alert(`hello edit process ${id}`);
+    const onEditUser=(obj)=>{
+        // alert(`hello edit process ${obj.name.first}`);
+        chatListRef.current.editSelectUserFormData(obj);
     }
 
+    const editedUserForm=(formData)=>{
+        nameListRef.current.editUserFormData(formData);
+    }
 
 
     return (
@@ -97,7 +101,7 @@ const Console = (props) => {
                 </div>
                 <div className="section">
                     <div className="col border border-primary m-1">
-                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef}  />
+                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef} editedUserFormm={editedUserForm} />
                     </div>
 
                 </div>

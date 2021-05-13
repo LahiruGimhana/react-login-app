@@ -12,8 +12,11 @@ let userHandler = new UserHandler();
         
         useImperativeHandle(ref, () => ({
             getUserFormData : (FormData)=>{
-                console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
+                // console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
                 addUserHandeler(FormData);
+            },
+            editUserFormData: (formData) => {
+                editUserHandeler(formData);
             }
         }));
 
@@ -93,10 +96,28 @@ let userHandler = new UserHandler();
     }
    
     const onEditUser=(id)=>{
-        props.onEditUser(id);
-        // props.onViewUser(tempView);
+        props.onEditUser(nameList[id]);
+        // alert(id)
+        return id;
     }
 
+    const editUserHandeler = (FormData) => {
+        
+        const User = {
+            name: { title: "Mrs", first:FormData.FirstName, last: FormData.LastName },
+            location: {city: FormData.City},
+            // picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
+        };
+        userHandler.editUser(User).then(data => {
+            setNameList(prevState => {
+                return { ...prevState, [data.key]: data.user };
+            });
+        }).catch(ex => {
+            console.error(ex);
+        });
+        // console.log(FormData);
+        
+    }
 
     /*     add user using hard code data
         =======================================================================================
@@ -155,7 +176,7 @@ let userHandler = new UserHandler();
             Object.keys(nameList).map(key => {
                 return (
                     <User
-                        picture={nameList[key].picture.medium}
+                        // picture={nameList[key].picture.medium}
                         name={`${nameList[key].name.first} ${nameList[key].name.last}`}
                         city={nameList[key].location.city}
                         id={key}
