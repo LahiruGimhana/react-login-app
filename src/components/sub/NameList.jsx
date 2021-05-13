@@ -1,12 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import User from './User';
 import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
-import './Name.css'
+import './NameList.css'
 
 let userHandler = new UserHandler();
 
-function NameList(props) {
+
+//Userform submited data 
+let NameList = forwardRef((props, ref) => {
+
+    useImperativeHandle(ref, () => ({
+        getUserFormData: (FormData) => {
+            // console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
+            addUserHandeler(FormData);
+        },
+        editUserFormData: (formData) => {
+            editUserHandeler(formData);
+        }
+    }));
+
+
+
+    // function NameList(props) {
 
     const [nameList, setNameList] = useState({});
 
@@ -28,9 +44,24 @@ function NameList(props) {
             console.error(ex);
         }); */
 
+
+
         try {
-            let User = await userHandler.getAllUsers();  //methanata userData eken return wena promis eka anne
-            setNameList(User);
+            let users = await userHandler.getAllUsers();  //methanata userData eken return wena promis eka anne
+
+            if (users) {
+                let usrList = Object.keys(users).reduce((acc, key) => {
+                    users[key].userId = key;
+                    acc[key] = users[key];
+
+                    return acc;
+
+                }, {})
+                setNameList(usrList);
+
+            }
+
+
         } catch (ex) {
             console.error(ex + 'user add error');
         }
@@ -59,9 +90,7 @@ function NameList(props) {
         userHandler.removeUser(id).then(() => {
             setNameList(prevVal => {
                 let tempPrev = { ...prevVal };
-                let x = tempPrev.id;
                 delete tempPrev[id];
-
                 return tempPrev;
             });
 
@@ -74,8 +103,36 @@ function NameList(props) {
     }
 
 
+    const onViewUser = (id) => {
+        let x = { ...nameList };
+        //read state data
+        // console.log(x[id].name.first);
+        props.onViewUser(x[id]);
+    }
 
+    const onEditUser = (id) => {
+        props.onEditUser(nameList[id]);
+        // alert(id)
+        return id;
+    }
 
+    const editUserHandeler = (FormData) => {
+
+        const User = {
+            name: { title: "Mrs", first: FormData.FirstName, last: FormData.LastName },
+            location: { city: FormData.City },
+            // picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
+        };
+        userHandler.editUser(User).then(data => {
+            setNameList(prevState => {
+                return { ...prevState, [data.key]: data.user };
+            });
+        }).catch(ex => {
+            console.error(ex);
+        });
+        // console.log(FormData);
+
+    }
 
     /*     add user using hard code data
         =======================================================================================
@@ -102,34 +159,9 @@ function NameList(props) {
         } */
 
     //add new user API 
-    const addUserHandeler = () => {
-        const newUser = {
-            name: { title: "Mrs", first: "Melike", last: "Abacı" },
-            location: {
-                city: "Elazığ",
-                state: "İzmir",
-                country: "Turkey",
-                postcode: 82207,
-            },
-
-            picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
-        };
-        //methanath promis ekak return wenne 
-        // let createdUser = userHandler.addNewUser(newUser); me widihata ganna nam awaite use k wenwa
-
-        //api promis ekak widihata hadamu -- use then, catch
-        userHandler.addNewUser(newUser).then(data => {
-
-            //methana prevState kiyanne func ekak, me widihata eka tama keti karla use kare
-            /* let func1=(prevState)=>{
-                return { ...prevState, [createdUser.id]: createdUser };
-            } */
-
-            setNameList(prevState => {
-                return { ...prevState, [data.key]: data.user };
-            });
-        }).catch(ex => {
-            console.error(ex);
+    const addUserHandeler = (data) => {
+        setNameList(prevState => {
+            return { ...prevState, [data.key]: data.user };
         });
     }
 
@@ -144,6 +176,8 @@ function NameList(props) {
                         city={nameList[key].location.city}
                         id={key}
                         onRemove={onRemoveUser}
+                        onView={onViewUser}
+                        onEdit={onEditUser}
                     />
 
                 );
@@ -168,7 +202,7 @@ function NameList(props) {
             </ul>
         </>
     );
-}
+})
 
 export default NameList
 

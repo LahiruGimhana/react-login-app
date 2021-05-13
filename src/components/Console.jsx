@@ -9,6 +9,7 @@ import NameList from './sub/NameList';
 const Console = (props) => {
 
     const chatListRef = useRef();
+    const nameListRef = useRef();
 
     let history = useHistory();
 
@@ -35,11 +36,42 @@ const Console = (props) => {
         return data ? JSON.parse(data).email : null;
     };
 
+
+    //add user button pass as a ref to userform through chatlist
     const openAddUserForm = () => {
         chatListRef.current.openAddUserPanel(true);
     }
 
 
+    //access user form submited data
+    // const submitedUserForm = (formData) => {
+    //     // alert(`bbb ${formData.FirstName}`)
+    //     alert(`bbb `)
+    // }
+    
+
+//submited form data come from chatList
+    const submitedUser = (formData)=>{
+        // alert(`bb ${formData.FirstName}`);
+        nameListRef.current.getUserFormData(formData);
+        // console.log(nameListRef.current)
+    }
+
+    //view data
+    const onViewUser=(obj)=>{
+        // console.log(obj.name.first);
+        // alert(obj.name.first);
+        chatListRef.current.viewSelectUserFormData(obj);
+    }
+
+    const onEditUser=(obj)=>{
+        // alert(`hello edit process ${obj.name.first}`);
+        chatListRef.current.editSelectUserFormData(obj);
+    }
+
+    const editedUserForm=(formData)=>{
+        nameListRef.current.editUserFormData(formData);
+    }
 
 
     return (
@@ -63,15 +95,14 @@ const Console = (props) => {
                             {/* <buuton className="btn btn-primary" onClick={addUserHandeler}>add user</buuton> */}
                         </div>
                         <div className="col" id="user" style={{ float: "right", textAlign: "left", width: '90%', margin: "0%", padding: "0%" }}>
-                            <NameList openAddUserForm={openAddUserForm} />
+                            <NameList openAddUserForm={openAddUserForm}  ref={nameListRef} onViewUser={onViewUser} onEditUser={onEditUser}/>
                         </div>
                     </div>
                 </div>
                 <div className="section">
                     <div className="col border border-primary m-1">
-                        <ChatList childRef={chatListRef} />
+                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef} editedUserFormm={editedUserForm} />
                     </div>
-
 
                 </div>
             </div>

@@ -54,7 +54,7 @@ class UserHandler {
 
     }
 
-//add new user using hardcode json data
+    //add new user using hardcode json data
 
     // addNewUser(user) {
     //     let tempUser = JSON.parse(JSON.stringify(user));
@@ -64,49 +64,82 @@ class UserHandler {
     // }
 
 
-    addNewUser(user){
+    addNewUser(user) {
         return new Promise((resolve, reject) => {
             fetch('https://react-getting-started-ae727-default-rtdb.firebaseio.com/user.json', {
                 method: 'POST', // or 'PUT'
-                 body: JSON.stringify(user),
-              }).then(response =>{
-                  return response.json();
-              }).then(data => {
+                body: JSON.stringify(user),
+            }).then(response => {
+                return response.json();
+            }).then(data => {
                 console.log('Success___:', data.name); //data kiyla return wenne object ekk
-                  //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
-                  return resolve({
-                      key:data.name,
-                      user:user
-                  });
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-                return reject(error);
-              });
-          }
+                //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
+                return resolve({
+                    key: data.name,
+                    user: user
+                });
+            })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    return reject(error);
+                });
+        }
         )
     }
 
 
 
-removeUser(id){
-    return new Promise((resolve, reject) => {
-    // deletes entities
-    // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
-    fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
-        method: 'DELETE',
+    removeUser(id) {
+        return new Promise((resolve, reject) => {
+            // deletes entities
+            // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+            fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${id}.json`, {
+                method: 'DELETE',
             })
-            .then(response => response.json())
-            .then(res => {
-              console.log(res);
-              return resolve(res);
-            })
-            .catch(err => {
-              console.log(err);
-              return reject(err);
-            });
+                .then(response => response.json())
+                .then(res => {
+                    console.log(res);
+                    return resolve(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                    return reject(err);
+                });
         })
     }
+
+
+
+
+    editUser(userId, user) {
+        return new Promise((resolve, reject) => {
+            console.log(user)
+            // deletes entities
+            // fetch(`https://fairestdb.p.rapidapi.com/friend/friendModel/_id/${this.state.id}`, {
+            fetch(`https://react-getting-started-ae727-default-rtdb.firebaseio.com/user/${userId}.json`, {
+                method: 'PATCH',
+                body: JSON.stringify(user),
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                console.log('Success___:', data.name); //data kiyla return wenne object ekk
+                //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
+                return resolve({
+                    key: data.name,
+                    user: user
+                });
+            })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    return reject(error);
+                });
+        }
+        )
+    }
+
+
 }
+
+
 export { UserHandler };
 
