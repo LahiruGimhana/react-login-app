@@ -111,7 +111,7 @@ class UserHandler {
 
 
 
-    editUser(userId, user) {
+    editSelectUser(userId, user) {
         return new Promise((resolve, reject) => {
             console.log(user)
             // deletes entities

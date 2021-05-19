@@ -2,11 +2,13 @@ import './App.css';
 import React, { useState } from 'react';
 import LoginForm from './components/LoginForm';
 import Nav from './components/nav';
+import { Provider } from 'react-redux'
 import Home from './components/Home';
 import Console from './components/Console';
 import Register from './components/Register';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import store from './redux/store';
 
 
 function App() {
@@ -14,40 +16,44 @@ function App() {
   console.log("================");
 
   return (
-    <BrowserRouter>
-    
-      <div className="App">
-        <Nav />
+    <Provider store={store}>
+      <BrowserRouter>
 
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Switch>
+        <div className="App">
+          <Nav />
 
-              {/* {!LoginData.email ? (<Route exact path="/login"> */}
-              {/* {!getData() ? (<Route exact path="/login"> */}
+          <div className="auth-wrapper">
+            <div className="auth-inner">
+              <Switch>
 
-              <Route exact path="/login">
-                <LoginForm />
-              </Route>
-              {/* ) :  */}
-              {/* ( */}
-              <Route exact path="/console">
-                <Console />
-              </Route>
-              {/* ) */}
-              {/* } */}
+                {/* {!LoginData.email ? (<Route exact path="/login"> */}
+                {/* {!getData() ? (<Route exact path="/login"> */}
 
-              <Register exact path="/register" />
-              <Route path="*">
-                <Redirect to="/login" />
-              </Route>
+                <Route exact path="/login">
+                  <LoginForm />
+                </Route>
+                {/* ) :  */}
+                {/* ( */}
+                <Route exact path="/console">
+                  <Console />
+                </Route>
+                {/* ) */}
+                {/* } */}
 
-            </Switch>
+                <Register exact path="/register" />
+                <Route path="*">
+                  <Redirect to="/login" />
+                </Route>
+
+              </Switch>
+            </div>
           </div>
-        </div>
 
-      </div>
-    </BrowserRouter>
+        </div>
+      </BrowserRouter>
+
+    </Provider>
+
   );
 }
 

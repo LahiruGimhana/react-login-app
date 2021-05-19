@@ -26,7 +26,7 @@ const editedUserForm=(formData)=>{
             {/* <p>Name:{props.name}</p> */}
 
             {/* <button onClick={this.onSubmit}>Login</button> */}
-            <UserForm ref={childRef} submitedUserFormm={submitedUserForm} editedUserFormm={editedUserForm}/>
+            <UserForm ref={childRef} submitedUserFormm={submitedUserForm} />
         </div>
     )
 };
