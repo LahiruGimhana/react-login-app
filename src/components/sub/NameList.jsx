@@ -28,7 +28,11 @@ let NameList = forwardRef((props, ref) => {
 
     const [nameList1, setNameList] = useState({});
     const nameList = useSelector(state => { return state.user_list })
+<<<<<<< remotes/origin/develop
 
+=======
+    // console.log(`fuuuuuuu ${nameList}`);
+>>>>>>> local
     //==========================================================
     //add all users using API
     useEffect(async () => {
@@ -161,6 +165,7 @@ let NameList = forwardRef((props, ref) => {
     const NameListComponent = () => {
         return (
             Object.keys(nameList).map(key => {
+                console.log(nameList[key].name);
                 return (
                     <User
                         picture={nameList[key].picture.medium}
