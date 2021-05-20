@@ -1,8 +1,10 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import User from './User';
 import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
 import './NameList.css'
+import { getUserList, removeUserList } from '../../redux/actions/userActions';
 
 let userHandler = new UserHandler();
 
@@ -10,22 +12,23 @@ let userHandler = new UserHandler();
 //Userform submited data 
 let NameList = forwardRef((props, ref) => {
 
+    let dispatch = useDispatch();
+
     useImperativeHandle(ref, () => ({
         getUserFormData: (FormData) => {
             // console.log(`aaaaaaaaaaaaaaaaaaaa ${FormData.FirstName}`)
             addUserHandeler(FormData);
         },
-        editUserFormData: (formData) => {
-            editUserHandeler(formData);
-        }
+       
     }));
 
 
 
     // function NameList(props) {
 
-    const [nameList, setNameList] = useState({});
-
+    const [nameList1, setNameList] = useState({});
+    const nameList = useSelector(state => { return state.user_list })
+    // console.log(`fuuuuuuu ${nameList}`);
     //==========================================================
     //add all users using API
     useEffect(async () => {
@@ -49,7 +52,9 @@ let NameList = forwardRef((props, ref) => {
         try {
             let users = await userHandler.getAllUsers();  //methanata userData eken return wena promis eka anne
 
-            if (users) {
+            dispatch(getUserList(users));
+
+            /* if (users) {
                 let usrList = Object.keys(users).reduce((acc, key) => {
                     users[key].userId = key;
                     acc[key] = users[key];
@@ -59,7 +64,7 @@ let NameList = forwardRef((props, ref) => {
                 }, {})
                 setNameList(usrList);
 
-            }
+            } */
 
 
         } catch (ex) {
@@ -88,11 +93,13 @@ let NameList = forwardRef((props, ref) => {
     const onRemoveUser = (id) => {
         console.log(id);
         userHandler.removeUser(id).then(() => {
-            setNameList(prevVal => {
+
+            dispatch(removeUserList(id));
+            /* setNameList(prevVal => {
                 let tempPrev = { ...prevVal };
                 delete tempPrev[id];
                 return tempPrev;
-            });
+            }); */
 
             // setNameList(prevState => {
             //     return { ...prevState, [createdUser.id]: createdUser };
@@ -111,28 +118,13 @@ let NameList = forwardRef((props, ref) => {
     }
 
     const onEditUser = (id) => {
-        props.onEditUser(nameList[id]);
-        // alert(id)
-        return id;
+        let x = { ...nameList };
+        let obj=x[id];
+        props.onEditUser(id, obj);
+        // return id;
     }
 
-    const editUserHandeler = (FormData) => {
-
-        const User = {
-            name: { title: "Mrs", first: FormData.FirstName, last: FormData.LastName },
-            location: { city: FormData.City },
-            // picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
-        };
-        userHandler.editUser(User).then(data => {
-            setNameList(prevState => {
-                return { ...prevState, [data.key]: data.user };
-            });
-        }).catch(ex => {
-            console.error(ex);
-        });
-        // console.log(FormData);
-
-    }
+  
 
     /*     add user using hard code data
         =======================================================================================
@@ -169,6 +161,7 @@ let NameList = forwardRef((props, ref) => {
     const NameListComponent = () => {
         return (
             Object.keys(nameList).map(key => {
+                console.log(nameList[key].name);
                 return (
                     <User
                         picture={nameList[key].picture.medium}

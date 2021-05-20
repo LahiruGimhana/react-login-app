@@ -5,8 +5,13 @@ import ChatList from './sub/ChatList';
 import User from './sub/User';
 import NameList from './sub/NameList';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { userFormVisible } from '../redux/actions/visibileAction';
+
 
 const Console = (props) => {
+    let dispatch = useDispatch();
+
 
     const chatListRef = useRef();
     const nameListRef = useRef();
@@ -39,7 +44,8 @@ const Console = (props) => {
 
     //add user button pass as a ref to userform through chatlist
     const openAddUserForm = () => {
-        chatListRef.current.openAddUserPanel(true);
+        dispatch(userFormVisible(true));
+        // chatListRef.current.openAddUserPanel(true);
     }
 
 
@@ -64,14 +70,12 @@ const Console = (props) => {
         chatListRef.current.viewSelectUserFormData(obj);
     }
 
-    const onEditUser=(obj)=>{
+    const onEditUser=(keyId, obj)=>{
         // alert(`hello edit process ${obj.name.first}`);
-        chatListRef.current.editSelectUserFormData(obj);
+        chatListRef.current.editSelectUserFormData(keyId, obj);
     }
 
-    const editedUserForm=(formData)=>{
-        nameListRef.current.editUserFormData(formData);
-    }
+ 
 
 
     return (
@@ -101,7 +105,7 @@ const Console = (props) => {
                 </div>
                 <div className="section">
                     <div className="col border border-primary m-1">
-                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef} editedUserFormm={editedUserForm} />
+                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef}  />
                     </div>
 
                 </div>

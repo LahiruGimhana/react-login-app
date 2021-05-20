@@ -72,7 +72,7 @@ class UserHandler {
             }).then(response => {
                 return response.json();
             }).then(data => {
-                console.log('Success___:', data.name); //data kiyla return wenne object ekk
+                // console.log('Success___:', data.name); //data kiyla return wenne object ekk
                 //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
                 return resolve({
                     key: data.name,
@@ -111,7 +111,7 @@ class UserHandler {
 
 
 
-    editUser(userId, user) {
+    editSelectUser(userId, user) {
         return new Promise((resolve, reject) => {
             console.log(user)
             // deletes entities
@@ -122,10 +122,13 @@ class UserHandler {
             }).then(response => {
                 return response.json();
             }).then(data => {
-                console.log('Success___:', data.name); //data kiyla return wenne object ekk
+                // console.log('Success___:', user.key); //data kiyla return wenne object ekk
                 //return resolve(data);         //data.name kiwoth kelinma string ekak return wenne
+                // console.log('Success___:', userId); //data kiyla return wenne object ekk
+                // console.log('Success___:---------------========'); //data kiyla return wenne object ekk
+                // console.log('Success___:',user); 
                 return resolve({
-                    key: data.name,
+                    key: userId,
                     user: user
                 });
             })
