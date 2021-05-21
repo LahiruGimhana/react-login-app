@@ -5,8 +5,14 @@ const userReducer = (state = {}, action) => {
         case GET_USER_LIST:
             if (action.userList) {
                 let usrList = Object.keys(action.userList).reduce((acc, key) => {
-                    action.userList[key].userId = key;
-                    acc[key] = action.userList[key];
+
+                    if (typeof action.userList[key] === 'object') {
+                        action.userList[key].userId = key;
+                        acc[key] = action.userList[key];
+
+                    }
+
+
 
                     return acc;
 

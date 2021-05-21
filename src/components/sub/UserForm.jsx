@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUserList, addNewUserToList } from '../../redux/actions/userActions';
 import { UserHandler } from '../../UserData/UserData';
@@ -8,26 +8,31 @@ let UserForm = forwardRef((props, ref) => {
     let dispatch = useDispatch();
 
     let visibility;
-    let formState=''
+    let formState = ''
 
 
-    const form_mode = useSelector(state => { return state.visible_list })
+    const form_data = useSelector(state => { return state.visible_list })
     // if(form_mode){
 
-    visibility=form_mode.visible;
-    formState=form_mode.mode;
-   
+    visibility = form_data.visible;
+    formState = form_data.mode;
+
     // }
 
 
-    const initialState = { FirstName: "", LastName: "", City: "", Id: "", Picture: "" , imageNu:"" ,keyId:""};
+    const initialState = { FirstName: "", LastName: "", City: "", Id: "", Picture: "", imageNu: "", keyId: "" };
     const [formData, setFormData] = useState(initialState);
 
- 
+
     console.log('full state');
-    console.log(formData);
-   
-  
+    console.log(form_data);
+
+    useEffect(() => {
+        console.log(form_data);
+        setFormData(form_data.data);
+    }, [form_data.data])
+
+
 
     // useImperativeHandle(ref, () => ({
     //     openAddUserPanel: (val) => {
@@ -35,31 +40,31 @@ let UserForm = forwardRef((props, ref) => {
     //         setVisibility(val);
     //         setFormState("ADD");
     //     },
-        // viewSelectUserFormData: (obj) => {
-        //     // alert(` success acces view data ${obj.name.first}`);
-        //     setVisibility(true);
-        //     setFormState("VIEW");
-        //     //state set - click karana userta adalawa 
-        //     setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium });
-        //     // console.log(`==================================`)
-        //     console.log(obj)
-        //     // getName(obj);
-        // },
+    // viewSelectUserFormData: (obj) => {
+    //     // alert(` success acces view data ${obj.name.first}`);
+    //     setVisibility(true);
+    //     setFormState("VIEW");
+    //     //state set - click karana userta adalawa 
+    //     setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium });
+    //     // console.log(`==================================`)
+    //     console.log(obj)
+    //     // getName(obj);
+    // },
 
-        // editSelectUserFormData: (keyId, obj) => {
-        //     // setVisibility(true);
-        //     // setFormState("EDIT");
-        //     // console.log(`==================================`)
-        //     let imageNu = (obj.picture.medium).match(/\d+/g);
-        //     // console.log(obj);
-            
-        //     setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium ,imageNu:imageNu, keyId: keyId});
-        // }
+    // editSelectUserFormData: (keyId, obj) => {
+    //     // setVisibility(true);
+    //     // setFormState("EDIT");
+    //     // console.log(`==================================`)
+    //     let imageNu = (obj.picture.medium).match(/\d+/g);
+    //     // console.log(obj);
+
+    //     setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium ,imageNu:imageNu, keyId: keyId});
+    // }
     // }));
 
 
 
-   
+
 
     const addNewUser = () => {
         const newUser = {
@@ -69,7 +74,7 @@ let UserForm = forwardRef((props, ref) => {
 
             picture: { medium: `https://randomuser.me/api/portraits/med/women/${Math.floor(Math.random() * 100)}.jpg` },
         };
- 
+
         userHandler.addNewUser(newUser).then(data => {
             dispatch(addNewUserToList(data));
 
@@ -129,7 +134,7 @@ let UserForm = forwardRef((props, ref) => {
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">First Name </span>
-                    <input disabled={formState === 'VIEW'} id="msg" type="text" className="form-control" name="FirstName" onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" required/>
+                    <input disabled={formState === 'VIEW'} id="msg" type="text" className="form-control" name="FirstName" onChange={e => setFormData({ ...formData, FirstName: e.target.value })} value={formData.FirstName} placeholder=" First Name" required />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-addon m-1">Last Name</span>
@@ -148,7 +153,7 @@ let UserForm = forwardRef((props, ref) => {
                 {formState === 'EDIT' && <button className="btn btn-primary m-2" type="submit" >save</button>}
                 {/* {viewVisible   && <button className="btn btn-primary m-2" type="submit" >{ !editVisible? 'ok':'no'}</button>} */}
                 <button className="btn btn-danger m-2" onClick={() => {
-                    visibility=false;
+                    visibility = false;
                 }}>Cancel</button>
             </form>}
         </>
