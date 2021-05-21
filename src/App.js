@@ -13,8 +13,6 @@ import store from './redux/store';
 
 function App() {
 
-  console.log("================");
-
   return (
     <Provider store={store}>
       <BrowserRouter>

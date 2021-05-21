@@ -2,17 +2,25 @@ import React from 'react';
 import NameList from './NameList';
 import './User.css'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { editVisible, viewVisible } from '../../redux/actions/visibileAction';
+
+
 function User(props) {
+    let dispatch = useDispatch();
+
     const onRemove = (id) => {
         props.onRemove(id);
-        console.log(props.id);
+        // console.log(props.id);
     }
 
     const onView=(id)=>{
         props.onView(id);
+        dispatch(viewVisible(id));
     }
 
     const onEdit=(id)=>{
+        dispatch(editVisible(id));
         props.onEdit(id);
     }
 

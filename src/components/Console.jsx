@@ -45,7 +45,7 @@ const Console = (props) => {
     //add user button pass as a ref to userform through chatlist
     const openAddUserForm = () => {
         dispatch(userFormVisible(true));
-        // chatListRef.current.openAddUserPanel(true);
+    //     // chatListRef.current.openAddUserPanel(true);
     }
 
 
@@ -59,7 +59,7 @@ const Console = (props) => {
 //submited form data come from chatList
     const submitedUser = (formData)=>{
         // alert(`bb ${formData.FirstName}`);
-        nameListRef.current.getUserFormData(formData);
+        // nameListRef.current.getUserFormData(formData);
         // console.log(nameListRef.current)
     }
 
@@ -67,12 +67,12 @@ const Console = (props) => {
     const onViewUser=(obj)=>{
         // console.log(obj.name.first);
         // alert(obj.name.first);
-        chatListRef.current.viewSelectUserFormData(obj);
+        // chatListRef.current.viewSelectUserFormData(obj);
     }
 
     const onEditUser=(keyId, obj)=>{
         // alert(`hello edit process ${obj.name.first}`);
-        chatListRef.current.editSelectUserFormData(keyId, obj);
+        // chatListRef.current.editSelectUserFormData(keyId, obj);
     }
 
  

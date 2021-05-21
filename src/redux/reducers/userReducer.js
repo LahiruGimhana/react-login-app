@@ -26,7 +26,7 @@ const userReducer = (state = {}, action) => {
             console.log(action.obj.key);
 
             console.log(action.obj.user);
-            console.log('/////////////////////');
+            // console.log('/////////////////////');
 
             //   Object.keys(action.obj)
 

@@ -10,37 +10,57 @@ let UserForm = forwardRef((props, ref) => {
     const initialState = { FirstName: "", LastName: "", City: "", Id: "", Picture: "" , imageNu:"" ,keyId:""};
     const [formData, setFormData] = useState(initialState);
 
-    const [visibility, setVisibility] = useState(false);
-    const [formState, setFormState] = useState("VIEW");
+    // const [visibility, setVisibility] = useState(false);
 
-    useImperativeHandle(ref, () => ({
-        openAddUserPanel: (val) => {
-            setFormData(initialState);
-            setVisibility(val);
-            setFormState("ADD");
-        },
-        viewSelectUserFormData: (obj) => {
-            // alert(` success acces view data ${obj.name.first}`);
-            setVisibility(true);
-            setFormState("VIEW");
+    console.log('state eka lg');
 
-            //state set - click karana userta adalawa 
-            setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium });
-            // console.log(`==================================`)
-            console.log(obj)
-            // getName(obj);
-        },
+    let visibility=false;
+    console.log(visibility);
+    let formState=''
+    // const [formState, setFormState] = useState("VIEW");
+    console.log(formState);
 
-        editSelectUserFormData: (keyId, obj) => {
-            setVisibility(true);
-            setFormState("EDIT");
-            // console.log(`==================================`)
-            let imageNu = (obj.picture.medium).match(/\d+/g);
-            // console.log(obj);
+    // useImperativeHandle(ref, () => ({
+    //     openAddUserPanel: (val) => {
+    //         setFormData(initialState);
+    //         setVisibility(val);
+    //         setFormState("ADD");
+    //     },
+        // viewSelectUserFormData: (obj) => {
+        //     // alert(` success acces view data ${obj.name.first}`);
+        //     setVisibility(true);
+        //     setFormState("VIEW");
+        //     //state set - click karana userta adalawa 
+        //     setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium });
+        //     // console.log(`==================================`)
+        //     console.log(obj)
+        //     // getName(obj);
+        // },
+
+        // editSelectUserFormData: (keyId, obj) => {
+        //     // setVisibility(true);
+        //     // setFormState("EDIT");
+        //     // console.log(`==================================`)
+        //     let imageNu = (obj.picture.medium).match(/\d+/g);
+        //     // console.log(obj);
             
-            setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium ,imageNu:imageNu, keyId: keyId});
-        }
-    }));
+        //     setFormData({ FirstName: obj.name.first, LastName: obj.name.last, City: obj.location.city, Id: obj.id, Picture: obj.picture.medium ,imageNu:imageNu, keyId: keyId});
+        // }
+    // }));
+
+
+
+    const form_mode = useSelector(state => { return state.visible_list })
+    if(form_mode){
+    // let formState={...formState, obj:form_mode.mode};
+    // let visibility={...visibility, statee:form_mode.visible}
+    
+    visibility=form_mode.visible;
+    console.log(visibility);
+    formState=form_mode.mode;
+    console.log(formState);
+   
+    }
 
     const addNewUser = () => {
         const newUser = {
@@ -95,6 +115,9 @@ let UserForm = forwardRef((props, ref) => {
 
         // console.log(`${formData.FirstName}-- ${formData.LastName}-- ${formData.City}`);
     }
+    console.log('form eka lg');
+    console.log(visibility);
+    console.log(formState);
 
     return (
         <>
@@ -128,7 +151,7 @@ let UserForm = forwardRef((props, ref) => {
                 {formState === 'EDIT' && <button className="btn btn-primary m-2" type="submit" >save</button>}
                 {/* {viewVisible   && <button className="btn btn-primary m-2" type="submit" >{ !editVisible? 'ok':'no'}</button>} */}
                 <button className="btn btn-danger m-2" onClick={() => {
-                    setVisibility(false);
+                    visibility=false;
                 }}>Cancel</button>
             </form>}
         </>

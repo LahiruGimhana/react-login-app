@@ -6,6 +6,7 @@ import { UserHandler } from '../../UserData/UserData';
 import './NameList.css'
 import { getUserList, removeUserList } from '../../redux/actions/userActions';
 
+
 let userHandler = new UserHandler();
 
 
@@ -182,7 +183,7 @@ let NameList = forwardRef((props, ref) => {
         <>
             <ul>
                 <div >
-                    <button className="btn btn-primary mb-4" onClick={props.openAddUserForm}>Add User</button>
+                    <button className="btn btn-primary mb-4" onClick={ props.openAddUserForm}>Add User</button>
                     <h3><span className="badge badge-pill badge-success">User List</span></h3>
                     <ul className="list-group">
                         <div>
