@@ -1,33 +1,19 @@
-import {FORM_VISIBLE, EDIT, ADD, VIEW} from '../actions/actionTypes';
+import {FORM_VISIBLE, SET_USER_FORM_MODE} from '../actions/actionTypes';
 
-const visibleReducer = (state = {first: "", last:"", city:"", id:""}, action, data={}) => {
+const visibleReducer = (state = {user_form_visibility:false, usr:''}, action, obj ,key) => {
     switch (action.type) {
         case FORM_VISIBLE:
             state={...state, visible: action.val}
             state={...state, mode:"ADD"}
-
             return state;
 
-        case EDIT:
-            // console.log('========= EDIT ==========');
+        case SET_USER_FORM_MODE:
             state={...state, visible: true}
-            state={...state, mode:"EDIT"}
-            // console.log(state);
+            state={...state, mode:action.mode}
+            let imageNu = (action.obj.picture.medium).match(/\d+/g);
 
-            return state;
-
-        case ADD:
-            // console.log('============ ADD =============');
-            state={...state, visible: true}
-            // console.log(state);
-
-            return state;
-
-        case VIEW:
-            // console.log('============ VIEW ==============');
-            state={...state, visible: true}
-            state={...state, mode:"VIEW"}
-            // console.log(state);
+            let formData={FirstName: action.obj.name.first, LastName: action.obj.name.last, City: action.obj.location.city, Id: action.obj.id, Picture: action.obj.picture.medium ,imageNu:imageNu, keyId: action.key};
+            state={...state, formData};
 
             return state;
 

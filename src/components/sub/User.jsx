@@ -3,7 +3,6 @@ import NameList from './NameList';
 import './User.css'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { editVisible, viewVisible } from '../../redux/actions/visibileAction';
 
 
 function User(props) {
@@ -16,11 +15,11 @@ function User(props) {
 
     const onView=(id)=>{
         props.onView(id);
-        dispatch(viewVisible(id));
+        // dispatch(viewVisible(id));
     }
 
     const onEdit=(id)=>{
-        dispatch(editVisible(id));
+        // dispatch(editVisible(id));
         props.onEdit(id);
     }
 

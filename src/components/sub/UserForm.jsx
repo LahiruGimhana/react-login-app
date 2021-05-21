@@ -7,18 +7,27 @@ let userHandler = new UserHandler();
 let UserForm = forwardRef((props, ref) => {
     let dispatch = useDispatch();
 
+    let visibility;
+    let formState=''
+
+
+    const form_mode = useSelector(state => { return state.visible_list })
+    // if(form_mode){
+
+    visibility=form_mode.visible;
+    formState=form_mode.mode;
+   
+    // }
+
+
     const initialState = { FirstName: "", LastName: "", City: "", Id: "", Picture: "" , imageNu:"" ,keyId:""};
     const [formData, setFormData] = useState(initialState);
 
-    // const [visibility, setVisibility] = useState(false);
-
-    console.log('state eka lg');
-
-    let visibility=false;
-    console.log(visibility);
-    let formState=''
-    // const [formState, setFormState] = useState("VIEW");
-    console.log(formState);
+ 
+    console.log('full state');
+    console.log(formData);
+   
+  
 
     // useImperativeHandle(ref, () => ({
     //     openAddUserPanel: (val) => {
@@ -50,17 +59,7 @@ let UserForm = forwardRef((props, ref) => {
 
 
 
-    const form_mode = useSelector(state => { return state.visible_list })
-    if(form_mode){
-    // let formState={...formState, obj:form_mode.mode};
-    // let visibility={...visibility, statee:form_mode.visible}
-    
-    visibility=form_mode.visible;
-    console.log(visibility);
-    formState=form_mode.mode;
-    console.log(formState);
    
-    }
 
     const addNewUser = () => {
         const newUser = {
@@ -108,12 +107,10 @@ let UserForm = forwardRef((props, ref) => {
 
         if (formState === 'EDIT') {
             editSelectUser()
-            // props.editedUserFormm(formData);
         } else {
             addNewUser();
         }
 
-        // console.log(`${formData.FirstName}-- ${formData.LastName}-- ${formData.City}`);
     }
     console.log('form eka lg');
     console.log(visibility);

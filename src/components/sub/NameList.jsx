@@ -5,6 +5,7 @@ import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
 import './NameList.css'
 import { getUserList, removeUserList } from '../../redux/actions/userActions';
+import { editVisible, viewVisible } from '../../redux/actions/visibileAction';
 
 
 let userHandler = new UserHandler();
@@ -115,13 +116,16 @@ let NameList = forwardRef((props, ref) => {
         let x = { ...nameList };
         //read state data
         // console.log(x[id].name.first);
-        props.onViewUser(x[id]);
+        // props.onViewUser(x[id]);
+        dispatch(viewVisible(id, x[id]));
     }
 
     const onEditUser = (id) => {
         let x = { ...nameList };
         let obj=x[id];
-        props.onEditUser(id, obj);
+        // props.onEditUser(id, obj);
+        dispatch(editVisible(id, obj));
+        
         // return id;
     }
 
@@ -167,7 +171,7 @@ let NameList = forwardRef((props, ref) => {
                     <User
                         picture={nameList[key].picture.medium}
                         name={`${nameList[key].name.first} ${nameList[key].name.last}`}
-                        city={nameList[key].location.city}
+                        // city={nameList[key].location.city}
                         id={key}
                         onRemove={onRemoveUser}
                         onView={onViewUser}
