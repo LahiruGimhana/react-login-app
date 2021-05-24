@@ -6,7 +6,7 @@ import User from './sub/User';
 import NameList from './sub/NameList';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { userFormVisible } from '../redux/actions/visibileAction';
+import { addVisible } from '../redux/actions/visibileAction';
 
 
 const Console = (props) => {
@@ -44,7 +44,7 @@ const Console = (props) => {
 
     //add user button pass as a ref to userform through chatlist
     const openAddUserForm = () => {
-        dispatch(userFormVisible(true));
+        dispatch(addVisible(true));
     //     // chatListRef.current.openAddUserPanel(true);
     }
 

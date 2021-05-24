@@ -1,8 +1,11 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUserList, addNewUserToList } from '../../redux/actions/userActions';
+import { userFormCancelVisible } from '../../redux/actions/visibileAction';
 import { UserHandler } from '../../UserData/UserData';
 let userHandler = new UserHandler();
+
+
 
 let UserForm = forwardRef((props, ref) => {
     let dispatch = useDispatch();
@@ -117,6 +120,11 @@ let UserForm = forwardRef((props, ref) => {
         }
 
     }
+
+    const cancelButtonClick=()=>{
+        dispatch(userFormCancelVisible());
+    }
+
     console.log('form eka lg');
     console.log(visibility);
     console.log(formState);
@@ -152,9 +160,7 @@ let UserForm = forwardRef((props, ref) => {
                 {formState !== 'VIEW' && <button className="btn btn-primary m-2">Reset</button>}
                 {formState === 'EDIT' && <button className="btn btn-primary m-2" type="submit" >save</button>}
                 {/* {viewVisible   && <button className="btn btn-primary m-2" type="submit" >{ !editVisible? 'ok':'no'}</button>} */}
-                <button className="btn btn-danger m-2" onClick={() => {
-                    visibility = false;
-                }}>Cancel</button>
+                <button className="btn btn-danger m-2" onClick={() => {cancelButtonClick()}}>Cancel</button>
             </form>}
         </>
     )
