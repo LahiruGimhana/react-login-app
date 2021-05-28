@@ -23,15 +23,21 @@ function User(props) {
         props.onEdit(id);
     }
 
+    const onViewChat=(id)=>{
+        props.onViewChat(id);
+    }
+
 
     return (
         <>
             <div className="col" style={{ width: "100%" }}>
                 <li className="list-group-item">
-                    <p style={{ color: "red" }}>
-                        <a href="">
+                    <p onClick={()=>{onViewChat(props.id)}} style={{ color: "red" }}>
+                        {/* <a href=""> */}
+                        <button style={{border:"none"}}>
                             <img src={props.picture} alt={props.name} className="border border-secondary rounded-circle d-inline-flex bd-highlight" />
-                        </a>
+                        </button>
+                        {/* </a> */}
                     </p>
                     <p><span style={{ color: "red" }}>Name:</span> {props.name}</p>
                     <p><span style={{ color: "red" }}>city: </span>{props.city}</p>

@@ -1,5 +1,5 @@
 // import {FORM_VISIBLE, EDIT, ADD, VIEW} from './actionTypes';
-import {FORM_VISIBLE, SET_USER_FORM_MODE, FORM_CANCEL_BUTTON} from './actionTypes';
+import {SET_USER_FORM_MODE, FORM_CANCEL_MODE , VIEW_IMAGE} from './actionTypes';
 
 
 export const viewVisible= (key, obj) => {
@@ -13,5 +13,12 @@ export const addVisible= (visibility) => {
 }
 
 export const userFormCancelVisible=()=>{
-    return {type: FORM_CANCEL_BUTTON};
+    return {type: FORM_CANCEL_MODE};
+}
+
+
+//view image in userChat
+
+export const onViewChatt = (obj) => {
+    return {type: SET_USER_FORM_MODE, mode:'CHATUSER', obj};
 }

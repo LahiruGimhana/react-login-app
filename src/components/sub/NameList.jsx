@@ -5,7 +5,7 @@ import chatList from './ChatList';
 import { UserHandler } from '../../UserData/UserData';
 import './NameList.css'
 import { getUserList, removeUserList } from '../../redux/actions/userActions';
-import { editVisible, viewVisible } from '../../redux/actions/visibileAction';
+import { editVisible, viewVisible, onViewChatt } from '../../redux/actions/visibileAction';
 
 
 let userHandler = new UserHandler();
@@ -129,7 +129,13 @@ let NameList = forwardRef((props, ref) => {
         // return id;
     }
 
-  
+
+
+    const onViewChat=(id)=>{        
+        let x = { ...nameList };
+        let obj=x[id];
+        dispatch(onViewChatt(obj))
+    }
 
     /*     add user using hard code data
         =======================================================================================
@@ -171,11 +177,13 @@ let NameList = forwardRef((props, ref) => {
                     <User
                         picture={nameList[key].picture.medium}
                         name={`${nameList[key].name.first} ${nameList[key].name.last}`}
-                        // city={nameList[key].location.city}
+                        city={nameList[key].location.city}
                         id={key}
+
                         onRemove={onRemoveUser}
                         onView={onViewUser}
                         onEdit={onEditUser}
+                        onViewChat={onViewChat}
                     />
 
                 );

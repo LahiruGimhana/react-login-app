@@ -30,21 +30,45 @@ function LoginForm() {
     };
 
 
+
+
+
     const login = (details) => {
         // console.log(`${details} use input data`);
+        let newLoginData = LoginData.map((item) => ({ name: item.name, email: item.email, password:item.password }));
+        // console.log('aaaaaaaaaaaaa');
+        // console.log(newLoginData[0]);
+        // console.log('aaaaaaaaaaaaa');
 
-        if (details.email == LoginData.email && details.password == LoginData.password) {
-            console.log("Loged in")
-            //add login data to sesssion storage
-            // localStorage.setItem('myData', JSON.stringify(details));
-            sessionStorage.setItem('userLoginSessionData', JSON.stringify(details));
-            history.push('/console');
+        // console.log(newLoginData);
+        newLoginData.forEach(element => {
+            console.log(element);
+            if (details.email == element.email && details.password == element.password) {
+                console.log("Loged in")
+                //add login data to sesssion storage
+                // localStorage.setItem('myData', JSON.stringify(details));
+                sessionStorage.setItem('userLoginSessionData', JSON.stringify(details));
+                history.push('/console');
+    
+            } else {
+                setError("error in the code");
+                console.log("password or email not match");
+                //   setError("details not match");
+            }
+        });
 
-        } else {
-            setError("error in the code");
-            console.log("password or email not match");
-            //   setError("details not match");
-        }
+        // if (details.email == LoginData.email && details.password == LoginData.password) {
+        //     console.log("Loged in")
+        //     //add login data to sesssion storage
+        //     // localStorage.setItem('myData', JSON.stringify(details));
+        //     sessionStorage.setItem('userLoginSessionData', JSON.stringify(details));
+        //     history.push('/console');
+
+        // } else {
+        //     setError("error in the code");
+        //     console.log("password or email not match");
+        //     //   setError("details not match");
+        // }
 
     };
 

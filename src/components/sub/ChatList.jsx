@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import { Redirect, Route } from "react-router-dom";
-import UserForm from './UserForm'
+import UserForm from './UserForm';
+import ChatInterface from './ChatInterface/ChatInterface';
 
 // let ChatList = ({childRef}) => {
 let ChatList = ({childRef, ...props}) => {
@@ -27,6 +28,7 @@ const editedUserForm=(formData)=>{
 
             {/* <button onClick={this.onSubmit}>Login</button> */}
             <UserForm ref={childRef} submitedUserFormm={submitedUserForm} />
+            <ChatInterface />
         </div>
     )
 };

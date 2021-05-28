@@ -9,4 +9,6 @@ export const FORM_VISIBLE='FORM_VISIBLE';
 // export const ADD='ADD';
 export const SET_USER_FORM_MODE='SET_USER_FORM_MODE';
 
-export const FORM_CANCEL_BUTTON='FORM_CANCEL_BUTTON';
+export const FORM_CANCEL_MODE='FORM_CANCEL_BUTTON';
+
+export const VIEW_IMAGE='VIEW_IMAGE';

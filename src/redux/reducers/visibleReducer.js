@@ -1,4 +1,4 @@
-import { FORM_VISIBLE, SET_USER_FORM_MODE, FORM_CANCEL_BUTTON } from '../actions/actionTypes';
+import { FORM_VISIBLE, SET_USER_FORM_MODE, FORM_CANCEL_MODE, VIEW_IMAGE } from '../actions/actionTypes';
 
 const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, action) => {
     switch (action.type) {
@@ -15,7 +15,7 @@ const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, actio
 
         //     return state;
 
-        case FORM_VISIBLE:
+        // case FORM_VISIBLE:
             
 
         case SET_USER_FORM_MODE:
@@ -24,16 +24,30 @@ const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, actio
                 state = { ...state, visible: action.visibility, mode: action.mode, data: {} }
                 return state;
             }
+            if(action.mode=="CHATUSER"){
+                let img={Picture:action.obj.picture.medium}
+                state = {...state,visible: action.visibility, mode: action.mode, data:img }
+                return state;
+            }
             else{
                 let imageNu = (action.obj.picture.medium).match(/\d+/g);
                 let formData = { FirstName: action.obj.name.first, LastName: action.obj.name.last, City: action.obj.location.city, Id: action.obj.id, Picture: action.obj.picture.medium, imageNu: imageNu, keyId: action.key }
                 state = { ...state, visible: true, mode: action.mode, data: formData }
                 return state;
             }
+  
 
-        case FORM_CANCEL_BUTTON:
-            state = { ...state, visible: false, mode: {}, data: {} }
-            return state
+        case FORM_CANCEL_MODE:
+            state = { ...state, visible: false, mode: "", data: {} }
+            return state;
+ 
+
+        // case VIEW_IMAGE:
+        //     // console.log(action.obj);
+        //     let img={Picture:action.obj.picture.medium}
+        //     state = {...state, data:img }
+        //     return state;
+
 
         default:
             return state
