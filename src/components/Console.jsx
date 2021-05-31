@@ -33,7 +33,7 @@ const Console = (props) => {
 
     const getData = () => {
         let data = sessionStorage.getItem('userLoginSessionData');
-        return data ? JSON.parse(data).email : null;
+        return data ? JSON.parse(data) : null;
     };
 
     useLayoutEffect(() => {
