@@ -1,10 +1,10 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom';
 import './Console.css';
 import ChatList from './sub/ChatList';
 import User from './sub/User';
 import NameList from './sub/NameList';
-
+import { register, registerCallBack } from '../socket/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { addVisible } from '../redux/actions/visibileAction';
 
@@ -31,23 +31,42 @@ const Console = (props) => {
         history.push('/login');
     }
 
+    const getData = () => {
+        let data = sessionStorage.getItem('userLoginSessionData');
+        return data ? JSON.parse(data).email : null;
+    };
+
     useLayoutEffect(() => {
         if (!getData()) {
             history.push('/login');
         }
     }, []);
 
+    useEffect(() => {
 
-    const getData = () => {
-        let data = sessionStorage.getItem('userLoginSessionData');
-        return data ? JSON.parse(data).email : null;
-    };
+        let session = getData();
+
+        register(session.name);
+
+        registerCallBack((message) => {
+
+            console.log(message);
+
+            //on message received logic
+
+        });
+
+
+    }, []);
+
+
+
 
 
     //add user button pass as a ref to userform through chatlist
     const openAddUserForm = () => {
         dispatch(addVisible(true));
-    //     // chatListRef.current.openAddUserPanel(true);
+        //     // chatListRef.current.openAddUserPanel(true);
     }
 
 
@@ -56,28 +75,28 @@ const Console = (props) => {
     //     // alert(`bbb ${formData.FirstName}`)
     //     alert(`bbb `)
     // }
-    
 
-//submited form data come from chatList
-    const submitedUser = (formData)=>{
+
+    //submited form data come from chatList
+    const submitedUser = (formData) => {
         // alert(`bb ${formData.FirstName}`);
         // nameListRef.current.getUserFormData(formData);
         // console.log(nameListRef.current)
     }
 
     //view data
-    const onViewUser=(obj)=>{
+    const onViewUser = (obj) => {
         // console.log(obj.name.first);
         // alert(obj.name.first);
         // chatListRef.current.viewSelectUserFormData(obj);
     }
 
-    const onEditUser=(keyId, obj)=>{
+    const onEditUser = (keyId, obj) => {
         // alert(`hello edit process ${obj.name.first}`);
         // chatListRef.current.editSelectUserFormData(keyId, obj);
     }
 
- 
+
 
 
 
@@ -103,13 +122,13 @@ const Console = (props) => {
                             {/* <buuton className="btn btn-primary" onClick={addUserHandeler}>add user</buuton> */}
                         </div>
                         <div className="col" id="user" style={{ float: "right", textAlign: "left", width: '90%', margin: "0%", padding: "0%" }}>
-                            <NameList openAddUserForm={openAddUserForm}  ref={nameListRef} onViewUser={onViewUser} onEditUser={onEditUser}/>
+                            <NameList openAddUserForm={openAddUserForm} ref={nameListRef} onViewUser={onViewUser} onEditUser={onEditUser} />
                         </div>
                     </div>
                 </div>
                 <div className="section">
                     <div className="col border border-primary m-1">
-                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef}  />
+                        <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef} />
                     </div>
 
                 </div>

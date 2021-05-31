@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import './login.css';
 import LoginData from '../config/json/loginData';
 
-import {register , registerCallBack} from '../socket/index';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -41,7 +40,7 @@ function LoginForm() {
 
     const login = (details) => {
         // console.log(`${details} use input data`);
-        let newLoginData = LoginData.map((item) => ({ name: item.name, email: item.email, password:item.password }));
+        let newLoginData = LoginData.map((item) => ({ name: item.name, email: item.email, password: item.password }));
         // console.log('aaaaaaaaaaaaa');
         // console.log(newLoginData[0]);
         // console.log('aaaaaaaaaaaaa');
@@ -56,18 +55,18 @@ function LoginForm() {
                 sessionStorage.setItem('userLoginSessionData', JSON.stringify(details));
 
                 //call socket 
-                register(element.name); 
+                /* register(element.name);  */
 
                 //call registerCallBack
-                const checkMsg=(message)=>{
+                /* const checkMsg=(message)=>{
                     console.log("this is a call back function");
                     console.log(message);
-                }
-    
-                registerCallBack(checkMsg);
-                
+                } */
+
+                /* registerCallBack(checkMsg); */
+
                 history.push('/console');
-    
+
             } else {
                 setError("error in the code");
                 console.log("password or email not match");
