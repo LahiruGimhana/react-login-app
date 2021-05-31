@@ -1,4 +1,4 @@
-import { FORM_VISIBLE, SET_USER_FORM_MODE, FORM_CANCEL_MODE, VIEW_IMAGE } from '../actions/actionTypes';
+import { SET_USER_FORM_MODE, FORM_CANCEL_MODE } from '../actions/actionTypes';
 
 const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, action) => {
     switch (action.type) {
@@ -24,9 +24,10 @@ const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, actio
                 state = { ...state, visible: action.visibility, mode: action.mode, data: {} }
                 return state;
             }
-            if(action.mode=="CHATUSER"){
-                let img={Picture:action.obj.picture.medium}
-                state = {...state,visible: action.visibility, mode: action.mode, data:img }
+            if(action.mode==="CHATUSER"){
+                // let img={Picture:action.obj.picture.medium}
+                let formData={Picture:action.obj.picture.medium,  FirstName: action.obj.name.first, LastName: action.obj.name.last }
+                state = {...state, visible: action.visibility, mode: action.mode, data:formData }
                 return state;
             }
             else{

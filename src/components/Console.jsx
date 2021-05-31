@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addVisible } from '../redux/actions/visibileAction';
 
 
+
+
 const Console = (props) => {
     let dispatch = useDispatch();
 
@@ -76,6 +78,8 @@ const Console = (props) => {
     }
 
  
+
+
 
 
     return (

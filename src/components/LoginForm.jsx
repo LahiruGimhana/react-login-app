@@ -4,7 +4,13 @@ import { useHistory } from 'react-router-dom';
 import './login.css';
 import LoginData from '../config/json/loginData';
 
+import {register , registerCallBack} from '../socket/index';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 function LoginForm() {
+    let dispatch = useDispatch();
+
 
     let history = useHistory();
     const [details, setDetails] = useState({ name: "", email: "", password: "" });
@@ -44,10 +50,22 @@ function LoginForm() {
         newLoginData.forEach(element => {
             console.log(element);
             if (details.email == element.email && details.password == element.password) {
-                console.log("Loged in")
+                console.log("Loged in success")
                 //add login data to sesssion storage
                 // localStorage.setItem('myData', JSON.stringify(details));
                 sessionStorage.setItem('userLoginSessionData', JSON.stringify(details));
+
+                //call socket 
+                register(element.name); 
+
+                //call registerCallBack
+                const checkMsg=(message)=>{
+                    console.log("this is a call back function");
+                    console.log(message);
+                }
+    
+                registerCallBack(checkMsg);
+                
                 history.push('/console');
     
             } else {

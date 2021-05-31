@@ -1,5 +1,5 @@
 // import {FORM_VISIBLE, EDIT, ADD, VIEW} from './actionTypes';
-import {SET_USER_FORM_MODE, FORM_CANCEL_MODE , VIEW_IMAGE} from './actionTypes';
+import {SET_USER_FORM_MODE, FORM_CANCEL_MODE } from './actionTypes';
 
 
 export const viewVisible= (key, obj) => {
