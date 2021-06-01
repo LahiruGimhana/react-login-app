@@ -1,3 +1,5 @@
+import {CHAT_MSG } from '../actions/actionTypes';
+
 // export default onViewChat=(obj)=>{
 //     return {}
 // }

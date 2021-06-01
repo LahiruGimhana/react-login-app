@@ -12,3 +12,6 @@ export const SET_USER_FORM_MODE='SET_USER_FORM_MODE';
 export const FORM_CANCEL_MODE='FORM_CANCEL_BUTTON';
 
 export const VIEW_IMAGE='VIEW_IMAGE';
+
+
+export const CHAT_MSG='CHAT_MSG';
