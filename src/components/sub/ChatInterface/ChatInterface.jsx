@@ -1,4 +1,4 @@
-import {React, useState , useEffect,} from 'react';
+import {React, useState , useEffect} from 'react';
 import SendMsg from './SendMsg';
 import Chathistory from './ChatHistory';
 import UserDetails from './UserDetails';

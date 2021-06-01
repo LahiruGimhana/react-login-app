@@ -6,7 +6,7 @@ function SendMsg(props) {
     // let visible=false;
     const [visible, setVisible] = useState(false)
     // console.log(`props pass data is ${props.consumerData.data.FirstName}`);
-    let consumer_name = props.consumerData.data.FirstName + ' ' + props.consumerData.data.LastName;
+    let consumer_name = props.consumerData.data.FirstName;// + ' ' + props.consumerData.data.LastName;
 
     //take login user name using session
     let sessionData = sessionStorage.getItem('userLoginSessionData');
@@ -21,9 +21,9 @@ function SendMsg(props) {
     const [textValue, setTextValue] = useState({ textMessage: "" });
 
     const handleInput = event => {
-        setVisible(true);
+        // setVisible(true);
         if (event.target.value == '') {
-            setVisible(false);
+            // setVisible(false);
         }
         setTextValue({ textMessage: event.target.value });
     };
@@ -42,10 +42,11 @@ function SendMsg(props) {
                         <input type="text" class="form-control" id="inputChat" placeholder="enter msg" onChange={handleInput} />
                     </div>
                     {/* <a href={sendText}> */}
-                    <button onClick={sendText}>
+                    <button className="btn btn-primary btn-sm" onClick={sendText}>
                         {/* {visible &&
                             <img src={send} style={{ width: "35px", height: "35px" }} />
                         } */}
+                        send
                     </button>
                 </div>
             </form>
@@ -53,4 +54,4 @@ function SendMsg(props) {
     )
 }
 
-export default SendMsg
+export default SendMsg;
