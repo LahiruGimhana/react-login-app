@@ -28,7 +28,7 @@ function SendMsg(props) {
         setTextValue({ textMessage: event.target.value });
     };
 
-    const sendText = () => {
+    const sendTextMsg = (evt) => {
         // alert(textValue.textMessage);
         sendMessage(producer_name, consumer_name, textValue.textMessage);
     }
@@ -42,12 +42,12 @@ function SendMsg(props) {
                         <input type="text" class="form-control" id="inputChat" placeholder="enter msg" onChange={handleInput} />
                     </div>
                     {/* <a href={sendText}> */}
-                    <button className="btn btn-primary btn-sm" onClick={sendText}>
+                    <div className="btn btn-primary btn-sm" onClick={sendTextMsg}>
                         {/* {visible &&
                             <img src={send} style={{ width: "35px", height: "35px" }} />
                         } */}
                         send
-                    </button>
+                    </div>
                 </div>
             </form>
         </div>
