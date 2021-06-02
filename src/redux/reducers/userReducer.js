@@ -12,8 +12,6 @@ const userReducer = (state = {}, action) => {
 
                     }
 
-
-
                     return acc;
 
                 }, {})

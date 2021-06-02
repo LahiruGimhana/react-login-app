@@ -11,13 +11,27 @@ function Chathistory() {
     const chat_data = useSelector(state => { return state.chat_list })
 
     useEffect(() => {
-        setChat(chat_data);
+        setChat(chat_data.receivedMsg);
     }, [chat_data])
 
+    const viewChatComponent=()=>{
+        return(
+            Object.keys(chat).map(key =>{
+                console.log(chat[key]);
+                return(
+                    <div>
+                        <p>{chat}</p>
+                    </div>
+                );
+            })
+        );
+    }
 
     return (
         <div style={{height:"420px", backgroundColor:"#ECE5DD"}}>
-            <p></p>
+            <div>
+                {viewChatComponent()}
+            </div>
         </div>
     )
 }

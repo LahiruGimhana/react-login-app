@@ -14,4 +14,5 @@ export const FORM_CANCEL_MODE='FORM_CANCEL_BUTTON';
 export const VIEW_IMAGE='VIEW_IMAGE';
 
 
-export const CHAT_MSG='CHAT_MSG';
+export const RECEIVE_MSG='RECEIVE_MSG';
+export const SEND_MSG='SEND_MSG';

@@ -169,10 +169,22 @@ let NameList = forwardRef((props, ref) => {
     }
 
 
+    const getData = () => {
+        let data = sessionStorage.getItem('userLoginSessionData');
+        // return data ? JSON.parse(data).name :null;
+        return JSON.parse(data).name;
+        // return data;
+    };
+    
+    // alert(getData())
+
     const NameListComponent = () => {
         return (
             Object.keys(nameList).map(key => {
-                console.log(nameList[key].name);
+                // console.log(nameList[key].name);
+                let fullName=`${nameList[key].name.first} ${nameList[key].name.last}`;
+
+                if(getData()!=fullName){
                 return (
                     <User
                         picture={nameList[key].picture.medium}
@@ -187,6 +199,7 @@ let NameList = forwardRef((props, ref) => {
                     />
 
                 );
+                }
             })
         );
     }

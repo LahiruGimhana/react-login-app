@@ -1,12 +1,17 @@
 import { React, useState, usetextValue } from 'react';
 import send from '../../img/send.png';
 import { sendMessage } from '../../../socket';
+import { useDispatch, useSelector } from 'react-redux';
+import {sendNewMsgToList} from '../../../redux/actions/chatAction';
 
 function SendMsg(props) {
+
+    let dispatch = useDispatch();
+
     // let visible=false;
     const [visible, setVisible] = useState(false)
     // console.log(`props pass data is ${props.consumerData.data.FirstName}`);
-    let consumer_name = props.consumerData.data.FirstName;// + ' ' + props.consumerData.data.LastName;
+    let consumer_name = props.consumerData.data.FirstName + ' ' + props.consumerData.data.LastName;
 
     //take login user name using session
     let sessionData = sessionStorage.getItem('userLoginSessionData');
@@ -21,9 +26,9 @@ function SendMsg(props) {
     const [textValue, setTextValue] = useState({ textMessage: "" });
 
     const handleInput = event => {
-        // setVisible(true);
+        setVisible(true);
         if (event.target.value == '') {
-            // setVisible(false);
+            setVisible(false);
         }
         setTextValue({ textMessage: event.target.value });
     };
@@ -31,6 +36,7 @@ function SendMsg(props) {
     const sendTextMsg = (evt) => {
         // alert(textValue.textMessage);
         sendMessage(producer_name, consumer_name, textValue.textMessage);
+        dispatch(sendNewMsgToList(textValue.textMessage));
     }
 
     return (
@@ -41,13 +47,10 @@ function SendMsg(props) {
                         {/* <label for="inputAddress">Address</label> */}
                         <input type="text" class="form-control" id="inputChat" placeholder="enter msg" onChange={handleInput} />
                     </div>
-                    {/* <a href={sendText}> */}
-                    <div className="btn btn-primary btn-sm" onClick={sendTextMsg}>
-                        {/* {visible &&
-                            <img src={send} style={{ width: "35px", height: "35px" }} />
-                        } */}
+                    {visible &&
+                    <div className="btn btn-primary  h-50" onClick={sendTextMsg}>
                         send
-                    </div>
+                    </div>}
                 </div>
             </form>
         </div>

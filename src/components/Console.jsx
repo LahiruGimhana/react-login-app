@@ -7,7 +7,7 @@ import NameList from './sub/NameList';
 import { register, registerCallBack } from '../socket/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { addVisible } from '../redux/actions/visibileAction';
-
+import {receivedNewMsgToList} from '../redux/actions/chatAction';
 
 
 
@@ -51,8 +51,11 @@ const Console = (props) => {
         registerCallBack((message) => {
 
             console.log(message);
+            // let x={event: "send", from: "gimhana lahiru", to: "admin admin", content: "hello world"};
 
-            //on message received logic
+            //receive nessage send to redux
+            dispatch(receivedNewMsgToList(message));
+            // dispatch(receivedNewMsgToList(x));
 
         });
 
