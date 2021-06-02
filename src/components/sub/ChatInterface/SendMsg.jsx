@@ -43,9 +43,6 @@ function SendMsg(props) {
                     </div>
                     {/* <a href={sendText}> */}
                     <div className="btn btn-primary btn-sm" onClick={sendTextMsg}>
-                        {/* {visible &&
-                            <img src={send} style={{ width: "35px", height: "35px" }} />
-                        } */}
                         send
                     </div>
                 </div>
