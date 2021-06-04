@@ -11,7 +11,7 @@ function Chathistory() {
     const chat_data = useSelector(state => { return state.chat_list })
 
     useEffect(() => {
-        setChat(chat_data.receivedMsg);
+        setChat(chat_data);
     }, [chat_data])
 
     const viewChatComponent=()=>{

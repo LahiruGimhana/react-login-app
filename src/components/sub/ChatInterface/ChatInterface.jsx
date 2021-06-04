@@ -14,14 +14,14 @@ function ChatInterface() {
     let dispatch = useDispatch();
     const form_data = useSelector(state => { return state.visible_list })
 
-    useEffect(() => {
-        // console.log(form_data);
-        // console.log(`props pass data is ${form_data.data.FirstName}`);
+    // useEffect(() => {
+    //     // console.log(form_data);
+    //     // console.log(`props pass data is ${form_data.data.FirstName}`);
 
-        // setImage(form_data.data);
-        setVisibility(form_data.visible);
-        setName(form_data.data.FirstName);
-    }, [form_data.data])
+    //     // setImage(form_data.data);
+    //     setVisibility(form_data.visible);
+    //     setName(form_data.data.FirstName);
+    // }, [form_data.data])
 
     // visibility = form_data.visible;
 
