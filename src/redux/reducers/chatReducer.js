@@ -1,48 +1,63 @@
-import {RECEIVE_MSG } from '../actions/actionTypes';
+import {RECEIVE_MSG, SEND_MSG } from '../actions/actionTypes';
 
 const chatReducer = (state={ }, action) => {
     switch (action.type) {
         case RECEIVE_MSG :
             // let x={event: "send", from: "gimhana lahiru", to: "admin admin", content: "hello world"};
 
-            if (action.message) {
-                // let message = Object.keys(action.message).reduce((acc, key, val) => {
-                //     // console.log(action.message[key].val);
-                    
-                //     acc[key] = action.message[key];
-                //     // console.log(`${key}  is ${acc[key]}`);
+            // if (action.message) {
+                if (state[action.message.from]) {
+                    let msg={
+                        direction: "RECEIVED",
+                        message: action.message.content,
+                        from: action.message.from,
+                        to: action.message.to,
+                    }
+                    state={...state, [action.message.from] : [...state[action.message.from], msg]}
+                } else {
+                    let msg={
+                        direction: "RECEIVED",
+                        message: action.message.content,
+                        from: action.message.from,
+                        to: action.message.to,
+                    }
+                    state={...state, [action.message.from] : [msg]}
+                }
 
-                //     // console.log('bbbbbbbb');
-                //     // console.log(acc[key]);
-                   
-                //     return acc;
-               
-                // }, {})
-                // let data={message}
-                //     console.log('aaaaaaaaaaaaaaaaaaa');
-                //     console.log(data)
-                    const objArray = [];
-                        Object.keys(action.message).forEach(key => objArray.push({
-                           name: key,
-                           rating: action.message[key]
-                        }));
-                    console.log('aaaaaaaaaaaaaaaaaaa');
-                        console.log(objArray);
-                    // }
-                //     return acc;
-
-                // let obj={};
-                // obj={...obj, ob}
-              
-        
-
-                // }, {})
-                // // state = { ...message };
-                // state = { ...state, message };
-                // console.log(`state is ${state}`);
-
-            }
+                //style of final object
+                // let users={
+                // 	"gimhana":[{ "fname": "gimhana", "lname": 'lahiru'}, {"fcolor":'blue', "lcolor":'yello'}],
+                // 	"sadun":[{ "fname": 'sadun', "lname": 'hasan'}, {"fcolor":'white', "lcolor":'black'}],
+                // 	"nimal": [{ "fname": 'aaa', "lname": 'bbb'}, {"fcolor":'red', "lcolor":'green'}],
+                // }
+            // } 
+            state={...state};
+            // console.log(`aa${state}`)
             return state;
+
+
+            case SEND_MSG:
+                // if(action.message) {
+                    if (state[action.producer_name]) {
+                        let msg={
+                            direction: "SEND",
+                            message: action.message,
+                            from:action.producer_name,
+                            to: action.consumer_name,
+                        }
+                        state={...state, [action.producer_name] : [...state[action.producer_name], msg]}
+                    } else {
+                        let msg={
+                            direction: "SEND",
+                            message: action.message,
+                            from:action.producer_name,
+                            to: action.consumer_name,
+                        }
+                        state={...state, [action.producer_name] : [msg]}
+                    }
+                // }
+            state={...state};
+            return state;   
                
         default:
             return state;       

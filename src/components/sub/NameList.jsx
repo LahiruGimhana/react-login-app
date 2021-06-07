@@ -181,8 +181,10 @@ let NameList = forwardRef((props, ref) => {
     const NameListComponent = () => {
         return (
             Object.keys(nameList).map(key => {
-                // console.log(nameList[key].name);
-                let fullName=`${nameList[key].name.first} ${nameList[key].name.last}`;
+                // console.log('user list');
+                // console.log(nameList);
+                // console.log(nameList[key]);
+                let fullName=`${nameList[key].name.first}`;// ${nameList[key].name.last}`;
 
                 if(getData()!=fullName){
                 return (

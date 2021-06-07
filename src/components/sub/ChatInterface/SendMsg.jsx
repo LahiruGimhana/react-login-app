@@ -11,7 +11,7 @@ function SendMsg(props) {
     // let visible=false;
     const [visible, setVisible] = useState(false)
     // console.log(`props pass data is ${props.consumerData.data.FirstName}`);
-    let consumer_name = props.consumerData.data.FirstName + ' ' + props.consumerData.data.LastName;
+    let consumer_name = props.consumerData.data.FirstName; // + ' ' + props.consumerData.data.LastName;
 
     //take login user name using session
     let sessionData = sessionStorage.getItem('userLoginSessionData');
@@ -36,7 +36,7 @@ function SendMsg(props) {
     const sendTextMsg = (evt) => {
         // alert(textValue.textMessage);
         sendMessage(producer_name, consumer_name, textValue.textMessage);
-        dispatch(sendNewMsgToList(textValue.textMessage));
+        dispatch(sendNewMsgToList(producer_name, consumer_name, textValue.textMessage));
     }
 
     return (
