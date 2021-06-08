@@ -21,14 +21,8 @@ function SendMsg(props) {
     let producer_name = JSON.parse(sessionData).name;
     // console.log(`session data is ${producer_name}`);
 
-
-
-
     //send text message
     const [textValue, setTextValue] = useState({ textMessage: "" });
-
-    
-
 
     const handleInput = event => {
         setVisible(true);
@@ -60,6 +54,7 @@ function SendMsg(props) {
                     <div className="btn btn-primary  h-50" onClick={sendTextMsg}>
                         send
                     </div>}
+                    
                 </div>
             </form>
         </div>
