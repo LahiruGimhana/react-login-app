@@ -1,6 +1,4 @@
-.container{
-    border: 1px solid burlywood;
-}
+
 
  h3{
     color: blue;
@@ -53,6 +51,7 @@ body {
     background: #acb3b9;            
     text-align: center;
     padding: 5px;
+    height: 10px;
 }
 #add{
      float: left;

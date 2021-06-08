@@ -4,9 +4,9 @@ import {useDispatch, useSelector } from 'react-redux';
 
 function UserDetails(props) {
 
-    const [image, setImage] = useState({Picture: ""});
+    // const [image, setImage] = useState({Picture: ""});
     let visibility =false;
-    let dispatch = useDispatch();
+    // let dispatch = useDispatch();
 
     // const form_data = useSelector(state => { return state.visible_list })
 
@@ -23,7 +23,13 @@ function UserDetails(props) {
         <>
         {/* {!visibility && */}
             <div style={{textAlign:"left", paddingLeft:"20px" , backgroundColor:"darkgrey"}}>
-                  < img src={props.consumerData.data.Picture} width="30" height="30"  className="border border-secondary rounded-circle d-inline-flex bd-highlight"></img>
+                <div className="col-1" style={{}}>
+                    <img src={props.consumerData.data.Picture} width="30" height="30"  className="border border-secondary rounded-circle d-inline-flex bd-highlight"></img>
+                    <p>{`${props.consumerData.data.FirstName}`}</p>
+                </div>
+                {/* <div className="col-6">
+                    <p>{`${props.consumerData.data.FirstName} ${props.consumerData.data.LastName}`}</p>
+                </div> */}
             </div>
         {/* } */}
         </>

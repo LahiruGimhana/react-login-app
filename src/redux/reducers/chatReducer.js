@@ -31,21 +31,22 @@ const chatReducer = (state={ }, action) => {
                 // 	"nimal": [{ "fname": 'aaa', "lname": 'bbb'}, {"fcolor":'red', "lcolor":'green'}],
                 // }
             // } 
-            state={...state};
+            // state={...state};
             // console.log(`aa${state}`)
             return state;
 
 
             case SEND_MSG:
-                // if(action.message) {
-                    if (state[action.producer_name]) {
+
+                    if(state[action.consumer_name]){
                         let msg={
                             direction: "SEND",
                             message: action.message,
                             from:action.producer_name,
                             to: action.consumer_name,
                         }
-                        state={...state, [action.producer_name] : [...state[action.producer_name], msg]}
+                        state={...state, [action.consumer_name] : [...state[action.consumer_name], msg]}
+                        // state={...state, [sender_and_receiver] : [...state[sender_and_receiver], msg]}
                     } else {
                         let msg={
                             direction: "SEND",
@@ -53,10 +54,9 @@ const chatReducer = (state={ }, action) => {
                             from:action.producer_name,
                             to: action.consumer_name,
                         }
-                        state={...state, [action.producer_name] : [msg]}
+                        state={...state, [action.consumer_name] : [msg]}
+                        // state={...state, [sender_and_receiver] : [msg]}
                     }
-                // }
-            state={...state};
             return state;   
                
         default:

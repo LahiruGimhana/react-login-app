@@ -109,6 +109,13 @@ const Console = (props) => {
 
             <div class="header">
                 <div className="col-11 center" >
+                    <div className="col">
+
+                    </div>
+                    <div className="col">
+
+                    </div>
+
                     <h3 >Chat Application</h3>
                     <h4 >Welcome, <span>{s_name}</span></h4>
                 </div>
@@ -120,7 +127,7 @@ const Console = (props) => {
             </div>
             <div class="wrapper clearfix">
                 <div class="nav">
-                    <div className="col border border-primary m-1" >
+                    <div className="col m-4" style={{height:'150%'}} >
                         <div className="col" id="add" style={{ float: "left", textAlign: "left", width: '10%', margin: "0%", padding: "0%" }}>
                             {/* <buuton className="btn btn-primary" onClick={addUserHandeler}>add user</buuton> */}
                         </div>
@@ -130,14 +137,13 @@ const Console = (props) => {
                     </div>
                 </div>
                 <div className="section">
-                    <div className="col border border-primary m-1">
+                    <div className="col m-1" style={{height:'100%'}} >
                         <ChatList submitedUserFormmm={submitedUser} childRef={chatListRef} />
                     </div>
-
                 </div>
             </div>
             <div class="footer">
-                <p>copyright &copy;#######</p>
+                {/* <p>copyright &copy;#######</p> */}
             </div>
 
         </div>

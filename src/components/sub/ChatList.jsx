@@ -23,7 +23,7 @@ const editedUserForm=(formData)=>{
 
     return (
         <div>
-            <span class="badge badge-pill badge-warning">Chat List</span>
+            {/* <span class="badge badge-pill badge-warning">Chat List</span> */}
             {/* <p>Name:{props.name}</p> */}
 
             {/* <button onClick={this.onSubmit}>Login</button> */}

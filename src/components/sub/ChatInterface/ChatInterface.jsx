@@ -2,6 +2,7 @@ import {React, useState , useEffect} from 'react';
 import SendMsg from './SendMsg';
 import Chathistory from './ChatHistory';
 import UserDetails from './UserDetails';
+import './ChatInterface.css';
 
 import {useDispatch, useSelector } from 'react-redux';
 
@@ -28,9 +29,11 @@ function ChatInterface() {
     return (
         <>
             {!visibility &&
-            <div>
+            <div className='body'>
                 <UserDetails consumerData={form_data}/>
-                <Chathistory consumerData={form_data}/>
+                <ul className="list-group">
+                    <Chathistory consumerData={form_data}/>
+                </ul>
                 <SendMsg consumerData={form_data}/>
             </div>
             }

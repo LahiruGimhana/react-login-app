@@ -210,8 +210,10 @@ let NameList = forwardRef((props, ref) => {
         <>
             <ul>
                 <div >
-                    <button className="btn btn-primary mb-4" onClick={ props.openAddUserForm}>Add User</button>
-                    <h3><span className="badge badge-pill badge-success">User List</span></h3>
+                    <div style={{marginLeft:'15px', marginTop:'1px'}}>
+                        <button className="btn btn-primary mb-1" onClick={ props.openAddUserForm}>Add User</button>
+                    </div>
+                    {/* <h3><span className="badge badge-pill badge-success">User List</span></h3> */}
                     <ul className="list-group">
                         <div>
                             {NameListComponent()}

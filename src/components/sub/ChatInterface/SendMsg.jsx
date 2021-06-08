@@ -9,7 +9,9 @@ function SendMsg(props) {
     let dispatch = useDispatch();
 
     // let visible=false;
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
+  
+    
     // console.log(`props pass data is ${props.consumerData.data.FirstName}`);
     let consumer_name = props.consumerData.data.FirstName; // + ' ' + props.consumerData.data.LastName;
 
@@ -25,6 +27,9 @@ function SendMsg(props) {
     //send text message
     const [textValue, setTextValue] = useState({ textMessage: "" });
 
+    
+
+
     const handleInput = event => {
         setVisible(true);
         if (event.target.value == '') {
@@ -37,15 +42,19 @@ function SendMsg(props) {
         // alert(textValue.textMessage);
         sendMessage(producer_name, consumer_name, textValue.textMessage);
         dispatch(sendNewMsgToList(producer_name, consumer_name, textValue.textMessage));
+        setTextValue({ textMessage: " " });
+        setVisible(false);
+
     }
 
     return (
         <div>
-            <form>
+            <form >
                 <div class="form-row" style={{ margin: "5px" }}>
+                    
                     <div class="form-group" style={{ width: "90%", paddingRight: "10px" }}>
                         {/* <label for="inputAddress">Address</label> */}
-                        <input type="text" class="form-control" id="inputChat" placeholder="enter msg" onChange={handleInput} />
+                        <input type="text" class="form-control" id="inputChat" placeholder="enter msg" value={textValue.textMessage} onChange={handleInput} />
                     </div>
                     {visible &&
                     <div className="btn btn-primary  h-50" onClick={sendTextMsg}>
