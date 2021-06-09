@@ -21,7 +21,7 @@ const Console = (props) => {
     let history = useHistory();
 
     let session = sessionStorage.getItem('userLoginSessionData');
-    let s_name = JSON.parse(session).name;
+    let s_name = session? JSON.parse(session).name : history.push('./login');
     // console.log(s_name);
 
     const logout = () => {
@@ -46,7 +46,9 @@ const Console = (props) => {
 
         let session = getData();
 
-        register(session.name);
+        if(session){
+            register(session.name);
+        }
 
         registerCallBack((message) => {
 

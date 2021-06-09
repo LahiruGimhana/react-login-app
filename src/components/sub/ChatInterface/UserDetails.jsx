@@ -18,18 +18,25 @@ function UserDetails(props) {
     // visibility = form_data.visible;
     visibility=props.consumerData.visibile;
 
-  
+
+    const check=()=>{
+            if(props.consumerData.data.FirstName!=''){
+                return(
+                    <div>
+                        <img src={props.consumerData.data.Picture} width="30" height="30"  className="border border-secondary rounded-circle d-inline-flex bd-highlight"/>
+                        <p>{`${props.consumerData.data.FirstName}`}</p>
+                    </div>
+                );
+            }
+    }
+
     return (
         <>
         {/* {!visibility && */}
             <div style={{textAlign:"left", paddingLeft:"20px" , backgroundColor:"darkgrey"}}>
                 <div className="col-1" style={{}}>
-                    <img src={props.consumerData.data.Picture} width="30" height="30"  className="border border-secondary rounded-circle d-inline-flex bd-highlight"></img>
-                    <p>{`${props.consumerData.data.FirstName}`}</p>
+                    {check()}
                 </div>
-                {/* <div className="col-6">
-                    <p>{`${props.consumerData.data.FirstName} ${props.consumerData.data.LastName}`}</p>
-                </div> */}
             </div>
         {/* } */}
         </>

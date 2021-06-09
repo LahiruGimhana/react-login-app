@@ -4,13 +4,17 @@ import './ChatHistory.css';
 
 
 function Chathistory(props) {
+    let count=0;
+    const dispatch=useDispatch();
+  
+
     let chat_user_name=props.consumerData.data.FirstName;
     // let your_name;
 
-    const your_name = () => {
-        let data = sessionStorage.getItem('userLoginSessionData');
-        return JSON.parse(data).name;
-    };
+    // const your_name = () => {
+    //     let data = sessionStorage.getItem('userLoginSessionData');
+    //     return JSON.parse(data).name;
+    // };
     // console.log(your_name());
     
 
@@ -21,6 +25,7 @@ function Chathistory(props) {
     // var dateTime = time;
     // console.log(dateTime);
 
+
     const viewChatComponent=()=>{
 
         if (chat_data[chat_user_name]) {
@@ -28,6 +33,12 @@ function Chathistory(props) {
                 chat_data[chat_user_name].map(data =>{
 
                     if(data.direction==='RECEIVED'){
+                      if(data.message && chat_user_name){
+                        count++;
+                        // dispatch(msgCounter(count));
+                    }
+                        console.log(`${chat_user_name} msg count is ${count}`); 
+
                         return(
                             <div class="chat-bubble_received received" >
                                    <div class="content_received"><p>{data.message} <small><sub>{time}</sub></small></p></div>
@@ -45,10 +56,11 @@ function Chathistory(props) {
 
                 })           
             )
+        }else{
+            return(<></>);
         }
     }
 
-  
 
     return (
         <div style={{height:"420px", backgroundColor:"#ECE5DD"}}>

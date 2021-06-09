@@ -1,6 +1,6 @@
 import { SET_USER_FORM_MODE, FORM_CANCEL_MODE } from '../actions/actionTypes';
 
-const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, action) => {
+const visibleReducer = (state = { visible: false, mode: "ADD" , data: {FirstName:''} }, action) => {
     switch (action.type) {
         // case FORM_VISIBLE:
         //     state = { ...state, visible: action.val, mode: "ADD", data: {} }
@@ -51,6 +51,7 @@ const visibleReducer = (state = { visible: false, mode: "ADD", data: {} }, actio
 
 
         default:
+            // alert(state.data.formData.FirstName)
             return state
     }
 }
