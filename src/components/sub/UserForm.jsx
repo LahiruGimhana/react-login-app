@@ -121,8 +121,12 @@ let UserForm = forwardRef((props, ref) => {
 
     }
 
+    
     const cancelButtonClick=()=>{
+        // visibility=!form_data.visible;
+        
         dispatch(userFormCancelVisible());
+        
     }
 
     // console.log('form eka lg');

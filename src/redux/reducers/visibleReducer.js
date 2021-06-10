@@ -1,4 +1,4 @@
-import { SET_USER_FORM_MODE, FORM_CANCEL_MODE , NOTIFY_MSG} from '../actions/actionTypes';
+import { SET_USER_FORM_MODE, FORM_CANCEL_MODE } from '../actions/actionTypes';
 
 const visibleReducer = (state = { visible: false, mode: "ADD" , data: {FirstName:''} }, action) => {
     switch (action.type) {
@@ -39,12 +39,12 @@ const visibleReducer = (state = { visible: false, mode: "ADD" , data: {FirstName
   
 
         case FORM_CANCEL_MODE:
-            state = { ...state, visible: false, mode: "", data: {} }
+            state = { ...state, visible: false, mode: "", data: {FirstName:''} }
             return state;
  
-        case NOTIFY_MSG:
-            let msg_count={ MsgCount : action.count.count}
-            state={ ...state, visible:true, mode:"", data:msg_count}
+        // case NOTIFY_MSG:
+        //     let msg_count={ MsgCount : action.count.count}
+        //     state={ ...state, visible:true, mode:"", data:msg_count}
 
         default:
             // alert(state.data.formData.FirstName)
