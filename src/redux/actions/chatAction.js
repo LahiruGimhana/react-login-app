@@ -10,3 +10,4 @@ export const receivedNewMsgToList = (message) => {
 export const sendNewMsgToList = (producer_name, consumer_name, message) => {
     return { type: SEND_MSG,producer_name, consumer_name, message };
 }
+

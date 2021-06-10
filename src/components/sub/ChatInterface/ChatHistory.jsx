@@ -2,6 +2,8 @@ import {React, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './ChatHistory.css';
 
+//call visibale List reducer
+import {msgCounter } from '../../../redux/actions/visibileAction';
 
 function Chathistory(props) {
     let count=0;
@@ -35,7 +37,7 @@ function Chathistory(props) {
                     if(data.direction==='RECEIVED'){
                       if(data.message && chat_user_name){
                         count++;
-                        // dispatch(msgCounter(count));
+                        dispatch(msgCounter(count));
                     }
                         console.log(`${chat_user_name} msg count is ${count}`); 
 

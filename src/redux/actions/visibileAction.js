@@ -1,5 +1,5 @@
 // import {FORM_VISIBLE, EDIT, ADD, VIEW} from './actionTypes';
-import {SET_USER_FORM_MODE, FORM_CANCEL_MODE } from './actionTypes';
+import {SET_USER_FORM_MODE, FORM_CANCEL_MODE , NOTIFY_MSG} from './actionTypes';
 
 
 export const viewVisible= (key, obj) => {
@@ -21,4 +21,10 @@ export const userFormCancelVisible=()=>{
 
 export const onViewChatt = (obj) => {
     return {type: SET_USER_FORM_MODE, mode:'CHATUSER', obj};
+}
+
+
+//notify unseen msg count
+export const msgCounter=(count)=>{
+    return { type:NOTIFY_MSG, count};
 }
