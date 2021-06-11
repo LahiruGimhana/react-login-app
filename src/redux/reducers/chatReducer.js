@@ -13,7 +13,9 @@ const chatReducer=produce((draft, action)=>{
                     from: action.message.from,
                     to: action.message.to,
                 }
-                    //  [draft[action.message.from]] = msg;    
+                // draft[action.message.from].push=msg;
+                draft[action.message.from] = msg;
+                     
             }
             else{
                 let msg={
@@ -22,9 +24,43 @@ const chatReducer=produce((draft, action)=>{
                     from: action.message.from,
                     to: action.message.to,
                 }
-                    draft={[action.message.from] : [msg]}
+                    // draft=[];
+                    // draft[action.message.from] = msg;
+                    draft= {[action.message.from] : msg};
             }
-        }
+            return draft;
+
+
+        case SEND_MSG:
+            if(draft[action.consumer_name]){
+                let msg={
+                    direction: "SEND",
+                    message: action.message,
+                    from:action.producer_name,
+                    to: action.consumer_name,
+                }
+                // draft[action.consumer_name] = msg;
+                draft[action.consumer_name]=msg;
+
+
+
+                // state={...state, [action.consumer_name] : [...state[action.consumer_name], msg]}
+                // state={...state, [sender_and_receiver] : [...state[sender_and_receiver], msg]}
+            }
+             else {
+                let msg={
+                    direction: "SEND",
+                    message: action.message,
+                    from: action.producer_name,
+                    to: action.consumer_name,
+                }
+                
+                draft= {[action.consumer_name] : msg};
+                // draft= {count:5, [action.consumer_name] : msg};
+
+            }
+            return draft;   
+        }       
     }, INITIAL_STATE)
             // if (state[action.message.from]) {
             //     let msg={

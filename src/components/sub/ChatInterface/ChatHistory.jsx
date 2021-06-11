@@ -31,9 +31,9 @@ function Chathistory(props) {
     const viewChatComponent=()=>{
 
         if (chat_data[chat_user_name]) {
-            return(
-                chat_data[chat_user_name].map(data =>{
-
+            // return(
+                // chat_data[chat_user_name].map(data =>{
+                let data=chat_data[chat_user_name];
                     if(data.direction==='RECEIVED'){
                       if(data.message && chat_user_name){
                         count++;
@@ -56,8 +56,8 @@ function Chathistory(props) {
                         );
                     }
 
-                })           
-            )
+                // })           
+            // )
         }else{
             return(<></>);
         }
